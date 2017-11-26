@@ -1,4 +1,3 @@
-[![Discord Server](https://discordapp.com/api/guilds/268970339948691456/embed.png)](https://discord.gg/MpnbrX7)
 [![Discord](https://img.shields.io/discord/268970339948691456.svg?style=flat-square)](https://discord.gg/MpnbrX7)
 [![Dependencies](https://img.shields.io/david/justdotJS/EasyRPC.svg?style=flat-square)]()
 [![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)]()
