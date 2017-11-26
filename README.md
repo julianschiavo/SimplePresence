@@ -20,7 +20,7 @@
 
 1. Make sure Discord is open and running, with no other Rich Presence currently set (check this by checking your own profile in the desktop app, there should be no "playing", "streaming", "watching", or "listening" status)
 2. Open Terminal or a command line and go to the app's folder: `cd EasyRPC-master`
-3. When you're in the folder, do `node main` to start the app. The app should open and focus
+3. When you're in the folder, do `npm run start` to start the app. The app should open and focus
 4. In the app, you'll see some default text. You can change the text shown on your Rich Presence by clicking and changing the text. These will update every 15 seconds.
 5. Your rich presence should now be visible to you (via the desktop app) and any other users who look at your profile
 
@@ -30,7 +30,7 @@
 
 1. Open `config.json` with a good text editor
 2. Change `working on a bot`, `using discord.js`, and `node.js` to the text you'd like to show on your Rich Presence by default
-3. Restart the app by doing Ctrl-C and `node main` again to see the new default text
+3. Restart the app by doing Ctrl-C and `npm run start` again to see the new default text
 
 ### Changing Images
 
