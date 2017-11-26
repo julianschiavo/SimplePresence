@@ -3,6 +3,7 @@
 [![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)]()
 [![Website](https://img.shields.io/badge/go_to-site-000000.svg?style=flat-square)]()
 
+<img src="screenshot.png" alt="Screenshot" style="height:30%!important"/>
 
 # EasyRPC
 
