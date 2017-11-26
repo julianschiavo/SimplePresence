@@ -7,7 +7,7 @@
 
 # EasyRPC
 
-## EasyRPC is an Electron app for macOS, Windows, and Linux that allows users to easily set their Discord Rich Presence Status.
+### EasyRPC is an Electron app for macOS, Windows, and Linux that allows users to easily set their Discord Rich Presence Status.
 
 ### It has a config for default strings, which can then be changed through the app at any time.
 
