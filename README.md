@@ -38,4 +38,4 @@
 
 ## Thanks
 
-Thanks to devsnek's original Rich Presence example for much of the base code used for EasyRPC.
+Thanks to [devsnek](https://github.com/devsnek)'s original Rich Presence example for much of the base code used for EasyRPC.
