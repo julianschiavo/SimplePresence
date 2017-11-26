@@ -1,0 +1,39 @@
+body, html {
+  margin: 0px;
+  height: 100%;
+  cursor: default;
+  font-family: sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-app-region: drag;
+}
+
+#emoji {
+  /*height: 60%;*/
+  display: grid;
+  -webkit-app-region: no-drag;
+font-size: 550%;
+  margin: auto;
+text-align: center;
+-webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.center {
+text-align: center;
+}
+
+h6 {
+margin-top:20px!important;
+margin-bottom:-17px!important
+}
+
+.low {
+margin-top:-10px!important
+}
+
+h1,h2,h3,h4,h5,h6 {
+-webkit-app-region: no-drag;
+}

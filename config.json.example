@@ -1,0 +1,13 @@
+{
+"defaultText": {
+"details": "working on a bot",
+"state": "using discord.js",
+"imageSmallText": "node.js",
+"imageLargeText": "programming"
+},
+"imageKeys": {
+"small": "brackets",
+"large": "nodejs"
+},
+"clientID": "340755371629215744"
+}
