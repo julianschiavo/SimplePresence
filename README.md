@@ -1,8 +1,7 @@
-<a href="https://discord.gg/MpnbrX7"><img src="https://discordapp.com/api/guilds/268970339948691456/embed.png" alt="Discord server" /></a>
 [![Discord Server](https://discordapp.com/api/guilds/268970339948691456/embed.png)](https://discord.gg/MpnbrX7)
 [![Dependencies](https://img.shields.io/david/justdotJS/EasyRPC.svg?style=flat-square)]()
 [![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)]()
-[![Website](https://img.shields.io/badge/go_to-website-FF8800.svg?style=flat-square)]()
+[![Website](https://img.shields.io/badge/go_to-site-FFFF00.svg?style=flat-square)]()
 
 
 # EasyRPC
