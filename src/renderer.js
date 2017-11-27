@@ -1,6 +1,10 @@
 const { webFrame } = require('electron');
 const snek = document.getElementById('snek');
 const counter = document.getElementById('boops');
+const os = require('os');
+if (os.type() !== 'Darwin') {
+document.body.style.backgroundColor = '#4C4C4C'
+}
 
 webFrame.setZoomLevelLimits(1, 1);
 

@@ -82,6 +82,7 @@ async function setActivity() {
     smallImageKey: small,
     smallImageText: four,
     instance: false,
+    type: "LISTENING"
   });
   } else {
   rpc.setActivity({
@@ -91,6 +92,7 @@ async function setActivity() {
     largeImageKey: large,
     largeImageText: one,
     instance: false,
+    type: "LISTENING"
   });
   }
 }
