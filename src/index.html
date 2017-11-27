@@ -5,24 +5,28 @@
     <title>Rich Presence Manager</title>
     <link rel=stylesheet href=style.css />
   </head>
-  <body><br><br><br><br>
-<div id="emoji">🎉</div><br>
+  <body><br><br>
+<div id="emoji">🎉</div>
 <div class="center low">
-<h6>details</h6>
-    <h1 id="two" contenteditable="true">working on a bot</h1>
-<h6>state</h6>
-    <h1 id="three" contenteditable="true">using discord.js</h1>
-<h6 id="fou">small image text</h6>
- <h1 id="four" contenteditable="true">node.js</h1>
-<h6>large image text</h6>
-    <h1 id="one" contenteditable="true">programming</h1></div>
+<h6>textConfig.details</h6>
+    <h2 id="two" contenteditable="true">working on a bot</h2>
+<h6>textConfig.state</h6>
+    <h2 id="three" contenteditable="true">using discord.js</h2>
+<h6>imageConfig.smallKey</h6>
+ <h2 id="five" contenteditable="true">placeholder</h2>
+<h6>imageConfig.largeKey</h6>
+    <h2 id="six" contenteditable="true">placeholder</h2>
+<h6 id="fou">imageConfig.smallText</h6>
+ <h2 id="four" contenteditable="true">node.js</h2>
+<h6>imageConfig.largeText</h6>
+    <h2 id="one" contenteditable="true">programming</h2></div>
     <div style="display:none!important" id=game><div id=snek>🐍</div></div>
     <h3 style="display:none!important" id=boops>0 BOOPS</h3>
 
     <script src="renderer.js"></script>
 <script>
 var configo = require('../config.json');
-var small = configo.imageKeys.small
+var small = configo.imageConfig.smallKey
 if (small == 'none') {
 document.getElementById('fou').style.display = "none"; 
 document.getElementById('four').style.display = "none"; 
