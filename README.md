@@ -23,19 +23,19 @@
 ## Customization
 ### Changing Default Text
 1. Open `config.json` with a good text editor
-2. Change `working on a bot`, `using discord.js`, and `node.js` to the text you'd like to show on your Rich Presence by default
+2. Change the `textConfig` text and `smallText`/`largeText` to the text you'd like to show on your Rich Presence by default
 3. Restart the app by doing Ctrl-C and `npm run start` again to see the new default text
 
 ### Changing Images
-1. Go to [this page](https://discordapp.com/developers/applications/me) and create an app. It's name is what will show up in place of the default `programming`.
-2. Creating it will give you a `client id`, open `config.json` and put it for the `clientID`
+1. Go to [this page](https://discordapp.com/developers/applications/me) and create an app. The name you choose will show up in place of the default `programming`.
+2. Creating it will give you a "`Client ID`", open `config.json` and put it for the `clientID`
 3. Scroll down to the bottom of the app page and Enable Rich Presence
 4. Upload an image as "small" and an image as "large"
-5. Put whatever you called them when uploading them (for example, `large`) for the `small` and `large` `imageKeys` in `config.json`
+5. Put whatever you called them when uploading them (for example, `large`) for the `smallKey` and `largeKey` within `imageConfig` in `config.json` *(Note: You can put `none` for `smallKey` to only have a large image)*
 6. Start EasyRPC again with `npm run start` and enjoy your new images!
 
 ### EasyRPC As A Package
-EasyRPC now supports building it as a package/app, which allows you to run and use it without the CLI. Make sure you do all necessary configuration and image options, as you can only change `details`, `state`, `small image text` and `large image text` after packaging it.
+EasyRPC now supports building it as a package/app, which allows you to run and use it without the CLI. Make sure you do all necessary configuration and image options, as you can't change default text and image configs without re-packaging.
 1. Run `npm install electron-packager -g` in the folder where you have EasyRPC's files
 2. Run `electron-packager .` to package EasyRPC
 3. You should find your app, native for the platform you are currently on, inside a new folder. The folder is named in the output:
