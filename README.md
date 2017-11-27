@@ -34,6 +34,15 @@
 5. Put whatever you called them when uploading them (for example, `large`) for the `small` and `large` `imageKeys` in `config.json`
 6. Start EasyRPC again with `npm run start` and enjoy your new images!
 
+### EasyRPC As A Package
+EasyRPC now supports building it as a package/app, which allows you to run and use it without the CLI. Make sure you do all necessary configuration and image options, as you can only change `details`, `state`, `small image text` and `large image text` after packaging it.
+1. Run `npm install electron-packager -g` in the folder where you have EasyRPC's files
+2. Run `electron-packager .` to package EasyRPC
+3. You should find your app, native for the platform you are currently on, inside a new folder. The folder is named in the output:
+```Wrote new app to /Foo/Bar/EasyRPC/EasyRPC-darwin-x64```
+4. Go inside the folder and run the app. 
+5. You should see the EasyRPC app working, with it's customization UI. As noted above, this will set your rich presence, and you can edit the text through this app, but some configs cannot be changed after packaging, unless you package again.
+
 ## Thanks
 Thanks to **[devsnek](https://github.com/devsnek)** for his original Rich Presence example, which helped with much of the base code used for EasyRPC.
 Thanks to **Rung#9946** for the `Changing Images` documentation.
