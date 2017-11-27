@@ -67,16 +67,27 @@ async function setActivity() {
   var three = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("three")[text];')
   var four = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("four")[text];')
 
+  if (small !== 'none') {
   rpc.setActivity({
     details: two,
     state: three,
     /*startTimestamp,*/
-    largeImageKey: small,
+    largeImageKey: large,
     largeImageText: one,
-    smallImageKey: large,
+    smallImageKey: small,
     smallImageText: four,
     instance: false,
   });
+  } else {
+  rpc.setActivity({
+    details: two,
+    state: three,
+    /*startTimestamp,*/
+    largeImageKey: large,
+    largeImageText: one,
+    instance: false,
+  });
+  }
 }
 
 rpc.on('ready', () => {
