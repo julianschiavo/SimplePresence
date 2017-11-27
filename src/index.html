@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <title>Rich Presence Manager</title>
     <link rel=stylesheet href=style.css />
-<script>
-var text = "textContent" in document.body ? "textContent" : "innerText";
-</script>
   </head>
   <body><br><br><br><br>
 <div id="emoji">🎉</div><br>
@@ -15,7 +12,7 @@ var text = "textContent" in document.body ? "textContent" : "innerText";
     <h1 id="two" contenteditable="true">working on a bot</h1>
 <h6>state</h6>
     <h1 id="three" contenteditable="true">using discord.js</h1>
-<h6>small image text</h6>
+<h6 id="fou">small image text</h6>
  <h1 id="four" contenteditable="true">node.js</h1>
 <h6>large image text</h6>
     <h1 id="one" contenteditable="true">programming</h1></div>
@@ -23,5 +20,13 @@ var text = "textContent" in document.body ? "textContent" : "innerText";
     <h3 style="display:none!important" id=boops>0 BOOPS</h3>
 
     <script src="renderer.js"></script>
+<script>
+var configo = require('../config.json');
+var small = configo.imageKeys.small
+if (small == 'none') {
+document.getElementById('fou').style.display = "none"; 
+document.getElementById('four').style.display = "none"; 
+}
+</script>
   </body>
 </html>
