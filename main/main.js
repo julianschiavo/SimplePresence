@@ -9,6 +9,8 @@ const url = require('url');
 const DiscordRPC = require('discord-rpc');
 const config = require('../config.json');
 const fs = require('fs');
+const parse = require('parse-duration')
+const moment = require('moment')
 
 if (config.defaultText || config.imageKeys) {
   console.log('ERROR: The config system has been altered since the last update. Please check config.json.example and update your config.\n')
@@ -58,6 +60,10 @@ function createWindow() {
   });
 }
 
+function getDuration() {
+
+}
+
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
@@ -99,19 +105,19 @@ async function setActivity() {
     activity.smallImageText = stext
   }
 
-  var openTimestamp = new Date();
-
-  if (config.timeConfig.timeType == 'start') {
-    var parse = require('parse-duration')
-    var moment = require('moment')
-    activity.startTimestamp = moment(openTimestamp).add(parse('-' + config.timeConfig.whatTime), 'ms').toDate();
-  } else if (config.timeConfig.timeType == 'end') {
-    var parse = require('parse-duration')
-    var moment = require('moment')
-    activity.endTimestamp = moment(openTimestamp).add(parse(config.timeConfig.whatTime), 'ms').toDate();
+  if (!openTimestamp) {
+    var openTimestamp = new Date();
   }
 
-  rpc.setActivity(activity);
+  if (config.timeConfig.timeType == 'start') {
+    activity.startTimestamp = moment(openTimestamp).add(parse('-' + config.timeConfig.whatTime), 'ms').toDate();
+  } else if (config.timeConfig.timeType == 'end') {
+    activity.endTimestamp = moment(openTimestamp).add(parse(config.timeConfig.whatTime), 'ms').toDate();
+  } else if (config.timeConfig.timeType == 'both') {
+    activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
+    activity.endTimestamp = moment(openTimestamp).add(parse(config.timeConfig.whatTime), 'ms').toDate();
+  }
+    rpc.setActivity(activity);
 }
 
 rpc.on('ready', () => {
