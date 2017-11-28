@@ -20,8 +20,8 @@
 
 * Ask any question about how to use EasyRPC in the [Discord chat](https://discord.gg/MpnbrX7).
 
-## **Do you want to contribute to the EasyRPC documentation?**
+## **Do you need support?**
 
-* Feel free to submit PRs for the Wiki!
+* If it's a bug, read **Did you find a bug?** above.
 
-EasyRPC Team
+* If it's just that you don't understand how to do something, or you're not sure, [read the wiki](https://github.com/justdotJS/EasyRPC/wiki) or [ask in the Discord chat](https://discord.gg/MpnbrX7).
