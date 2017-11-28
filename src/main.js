@@ -20,10 +20,11 @@ const ClientId = config.clientID;
 let mainWindow;
 
 function createWindow() {
+  var width = 500 //320
+  var height = 420 //500
   mainWindow = new BrowserWindow({
-    /*w340,h380*/
-    width: 350,//320
-    height: 500,
+    width: width,
+    height: height,
     resizable: false,
     titleBarStyle: 'hidden',
     vibrancy: 'dark',
@@ -33,7 +34,13 @@ function createWindow() {
   });
 
   if (config.imageConfig.showButton == true) {
-    mainWindow.setSize(320, 540);
+    var height = height + 40
+    mainWindow.setSize(width, height);
+  }
+
+  if (config.timeConfig.timeType !== 'none') {
+    var height = height + 60
+    mainWindow.setSize(width, height);
   }
 
   mainWindow.on('ready-to-show', () => {
@@ -67,46 +74,49 @@ DiscordRPC.register(ClientId);
 const rpc = new DiscordRPC.Client({
   transport: 'ipc'
 });
-const startTimestamp = new Date();
 
 async function setActivity() {
   if (!rpc || !mainWindow)
     return;
 
-  var one = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("one")[text];')
-  var two = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("two")[text];')
-  var three = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("three")[text];')
-  var four = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("four")[text];')
-  var large = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("six")[text];')
-  var small = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("five")[text];')
+  var ltext = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("ltext")[text];')
+  var details = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("details")[text];')
+  var state = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("state")[text];')
+  var stext = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("stext")[text];')
+  var lkey = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("lkey")[text];')
+  var skey = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("skey")[text];')
 
-  if (small !== 'none') {
-    rpc.setActivity({
-      details: two,
-      state: three,
-      /*startTimestamp,*/
-      largeImageKey: large,
-      largeImageText: one,
-      smallImageKey: small,
-      smallImageText: four,
-      instance: false
-    });
-  } else {
-    rpc.setActivity({
-      details: two,
-      state: three,
-      /*startTimestamp,*/
-      largeImageKey: large,
-      largeImageText: one,
-      instance: false
-    });
+  var activity = {
+    details: details,
+    state: state,
+    largeImageKey: lkey,
+    largeImageText: ltext,
+    instance: false
   }
+
+  if (skey !== 'none') {
+    activity.smallImageKey = skey
+    activity.smallImageText = stext
+  }
+
+  var openTimestamp = new Date();
+
+  if (config.timeConfig.timeType == 'start') {
+    var parse = require('parse-duration')
+    var moment = require('moment')
+    activity.startTimestamp = moment(openTimestamp).add(parse('-' + config.timeConfig.whatTime), 'ms').toDate();
+  } else if (config.timeConfig.timeType == 'end') {
+    var parse = require('parse-duration')
+    var moment = require('moment')
+    activity.endTimestamp = moment(openTimestamp).add(parse(config.timeConfig.whatTime), 'ms').toDate();
+  }
+
+  rpc.setActivity(activity);
 }
 
 rpc.on('ready', () => {
   setActivity();
 
-  // activity can only be set every 15 seconds
   setInterval(() => {
     setActivity();
   }, 15e3);

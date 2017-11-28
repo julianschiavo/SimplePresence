@@ -10,5 +10,9 @@
 "largeText": "programming",
 "showButton": true
 },
+"timeConfig": {
+"timeType": "none",
+"whatTime": "0s"
+},
 "clientID": "340755371629215744"
 }

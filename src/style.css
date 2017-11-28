@@ -43,6 +43,7 @@ h6 {
   -ms-user-select: none;
   user-select: none;
 }
-#item {
-width:50%!important
+.table > .item {
+width:50%!important;
+float: left;
 }
