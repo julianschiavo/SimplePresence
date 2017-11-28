@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 
-const { app, BrowserWindow } = require('electron');
+const {
+  app,
+  BrowserWindow
+} = require('electron');
 const path = require('path');
 const url = require('url');
 const DiscordRPC = require('discord-rpc');
@@ -8,8 +11,8 @@ const config = require('../config.json');
 const fs = require('fs');
 
 if (config.defaultText || config.imageKeys) {
-console.log('ERROR: The config system has been altered since the last update. Please check config.json.example and update your config.\n')
-return app.quit();
+  console.log('ERROR: The config system has been altered since the last update. Please check config.json.example and update your config.\n')
+  return app.quit();
 }
 
 const ClientId = config.clientID;
@@ -28,6 +31,10 @@ function createWindow() {
     frame: false,
     show: false
   });
+
+  if (config.imageConfig.showButton == true) {
+    mainWindow.setSize(320, 540);
+  }
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -57,14 +64,15 @@ app.on('activate', () => {
 
 DiscordRPC.register(ClientId);
 
-const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+const rpc = new DiscordRPC.Client({
+  transport: 'ipc'
+});
 const startTimestamp = new Date();
 
 async function setActivity() {
   if (!rpc || !mainWindow)
     return;
 
-  var boops = await mainWindow.webContents.executeJavaScript('window.boops');
   var one = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("one")[text];')
   var two = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("two")[text];')
   var three = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("three")[text];')
@@ -73,27 +81,25 @@ async function setActivity() {
   var small = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("five")[text];')
 
   if (small !== 'none') {
-  rpc.setActivity({
-    details: two,
-    state: three,
-    /*startTimestamp,*/
-    largeImageKey: large,
-    largeImageText: one,
-    smallImageKey: small,
-    smallImageText: four,
-    instance: false,
-    type: "LISTENING"
-  });
+    rpc.setActivity({
+      details: two,
+      state: three,
+      /*startTimestamp,*/
+      largeImageKey: large,
+      largeImageText: one,
+      smallImageKey: small,
+      smallImageText: four,
+      instance: false
+    });
   } else {
-  rpc.setActivity({
-    details: two,
-    state: three,
-    /*startTimestamp,*/
-    largeImageKey: large,
-    largeImageText: one,
-    instance: false,
-    type: "LISTENING"
-  });
+    rpc.setActivity({
+      details: two,
+      state: three,
+      /*startTimestamp,*/
+      largeImageKey: large,
+      largeImageText: one,
+      instance: false
+    });
   }
 }
 

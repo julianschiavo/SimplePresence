@@ -1,18 +1,18 @@
-const { webFrame } = require('electron');
+const {
+  webFrame
+} = require('electron');
+const {
+  remote
+} = require('electron')
+const mainProcess = remote.require('./main.js');
 const snek = document.getElementById('snek');
 const counter = document.getElementById('boops');
 const os = require('os');
 if (os.type() !== 'Darwin') {
-document.body.style.backgroundColor = '#4C4C4C'
+  document.body.style.backgroundColor = '#4C4C4C'
 }
 
 webFrame.setZoomLevelLimits(1, 1);
-
-window.boops = 0;
-function boop() {
-  window.boops++;
-  counter.innerHTML = `${window.boops} BOOPS`;
-}
 
 const config = require('../config.json')
 console.log(config.textConfig.details)
@@ -25,3 +25,16 @@ document.getElementById('four')[text] = config.imageConfig.smallText
 document.getElementById('one')[text] = config.imageConfig.largeText
 document.getElementById('five')[text] = config.imageConfig.smallKey
 document.getElementById('six')[text] = config.imageConfig.largeKey
+if (config.imageConfig.showButton == false) {
+  document.getElementById('button').style.display = 'none'
+}
+var small = config.imageConfig.smallKey
+if (small == 'none') {
+  document.getElementById('fou').style.display = "none"; 
+  document.getElementById('four').style.display = "none"; 
+}
+
+function upload() {
+  var open = require("open");
+  open('https://canary.discordapp.com/developers/applications/me/' + config.clientID.toString());
+}

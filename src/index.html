@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Rich Presence Manager</title>
-    <link rel=stylesheet href=style.css />
-  </head>
-  <body id="body"><br><br>
-<div id="emoji">🎉</div>
-<div class="center low">
-<h6>textConfig.details</h6>
-    <h2 id="two" contenteditable="true">working on a bot</h2>
-<h6>textConfig.state</h6>
-    <h2 id="three" contenteditable="true">using discord.js</h2>
-<h6>imageConfig.smallKey</h6>
- <h2 id="five" contenteditable="true">placeholder</h2>
-<h6>imageConfig.largeKey</h6>
-    <h2 id="six" contenteditable="true">placeholder</h2>
-<h6 id="fou">imageConfig.smallText</h6>
- <h2 id="four" contenteditable="true">node.js</h2>
-<h6>imageConfig.largeText</h6>
-    <h2 id="one" contenteditable="true">programming</h2></div>
-    <div style="display:none!important" id=game><div id=snek>🐍</div></div>
-    <h3 style="display:none!important" id=boops>0 BOOPS</h3>
-
-    <script src="renderer.js"></script>
-<script>
-var configo = require('../config.json');
-var small = configo.imageConfig.smallKey
-if (small == 'none') {
-document.getElementById('fou').style.display = "none"; 
-document.getElementById('four').style.display = "none"; 
-}
-</script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Rich Presence Manager</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body id="body">
+  <br>
+  <br>
+  <div id="emoji">
+    🎉
+  </div>
+  <div class="center low">
+    <h6>textConfig.details</h6>
+    <h2 contenteditable="true" id="two">placeholder</h2>
+    <h6>textConfig.state</h6>
+    <h2 contenteditable="true" id="three">placeholder</h2>
+    <h6>imageConfig.smallKey</h6>
+    <h2 contenteditable="true" id="five">placeholder</h2>
+    <h6>imageConfig.largeKey</h6>
+    <h2 contenteditable="true" id="six">placeholder</h2>
+    <h6 id="fou">imageConfig.smallText</h6>
+    <h2 contenteditable="true" id="four">placeholder</h2>
+    <h6>imageConfig.largeText</h6>
+    <h2 contenteditable="true" id="one">placeholder</h2>
+    <h3 id="button"><a href="#" onclick="upload()">upload images</a></h3>
+  </div>
+  <script src="renderer.js">
+  </script> 
+</body>
 </html>

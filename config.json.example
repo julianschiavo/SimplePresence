@@ -4,10 +4,11 @@
 "state": "using discord.js"
 },
 "imageConfig": {
-"smallKey": "brackets",
-"largeKey": "nodejs",
+"smallKey": "nodejs",
+"largeKey": "brackets",
 "smallText": "node.js",
-"largeText": "programming"
+"largeText": "programming",
+"showButton": true
 },
 "clientID": "340755371629215744"
 }

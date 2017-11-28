@@ -6,40 +6,38 @@ body, html {
   -webkit-touch-callout: none;
   -webkit-app-region: drag;
 }
-
 #emoji {
   /*height: 60%;*/
   display: grid;
-font-size: 350%;
+  font-size: 350%;
   margin: auto;
-text-align: center;
--webkit-user-select: none;
+  text-align: center;
+  -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-
-.center {
-text-align: center;
+.center, h2 {
+  text-align: center;
 }
-
+a {
+  text-align: center;
+  text-decoration: underline
+}
 h6 {
-margin-top:20px!important;
-margin-bottom:-17px!important
+  margin-top: 20px!important;
+  margin-bottom: -17px!important
 }
-
 .low {
-margin-top:-10px!important
+  margin-top: -10px!important
 }
-
-h1,h2,h3,h4,h5,h6 {
--webkit-app-region: no-drag;
-color:white
+h1, h2, h3, h4, h5, h6 {
+  -webkit-app-region: no-drag;
+  color: white
 }
-
 h6 {
--webkit-user-select: none;
+  -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
