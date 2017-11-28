@@ -22,7 +22,7 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
     /*w340,h380*/
-    width: 320,
+    width: 350,//320
     height: 500,
     resizable: false,
     titleBarStyle: 'hidden',
