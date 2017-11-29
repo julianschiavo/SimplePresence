@@ -104,13 +104,14 @@ end tell`)
         activity.startTimestamp = moment(openTimestamp).add('-' + rtn.position, 's').toDate();
         activity.details = rtn.name
         activity.state = rtn.artist
+        activity.endTimestamp = moment(openTimestamp).add(rtn.duration, 's').toDate();
         //activity.spectateSecret = "https://apple.com/music",
-        if (rtn.state !== 'paused') {
+        /*if (rtn.state !== 'paused') {
         activity.endTimestamp = moment(openTimestamp).add(rtn.duration, 's').toDate();
       } else {
         activity.endTimestamp = moment(new Date()).add(rtn.position, 's').toDate();
         console.log(activity.endTimestamp)
-      }
+      }*/
         if (!oldID || !oldPos) {
           oldID = rtn.id
           oldPos = rtn.position
