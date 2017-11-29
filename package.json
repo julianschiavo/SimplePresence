@@ -15,18 +15,18 @@
   },
   "scripts": {
     "start": "electron main/main.js",
-    "music": "electron music/main.js"
+    "apple": "electron music/apple/main.js",
+    "spotify": "electron music/spotify/main.js"
   },
   "dependencies": {
     "discord-rpc": "github:devsnek/discord-rpc",
     "moment": "^2.19.2",
+    "node-spotify-webhelper": "github:justdotJS/node-spotify-webhelper",
     "open": "0.0.5",
     "osascript-promise": "^1.0.0",
     "parse-duration": "^0.1.1",
-    "snekfetch": "^3.5.8"
-  },
-  "devDependencies": {
-    "electron": "^1.7.9"
+    "snekfetch": "^3.5.8",
+     "electron": "^1.7.9"
   },
   "browser": {
     "net": false,
