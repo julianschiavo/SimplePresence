@@ -71,6 +71,8 @@ if (config.musicType == 'apple') {
   });
 
   var oldID
+  var oldPos
+  var timer
 
   async function setActivity() {
     if (!rpc || !mainWindow)
@@ -86,7 +88,7 @@ if (config.musicType == 'apple') {
       var openTimestamp = new Date();
     }
 
-    activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
+    //activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
     applescript(`tell application "iTunes"
 	if player state is playing or player state is paused then
 		set tname to (get name of the current track)
@@ -94,22 +96,31 @@ if (config.musicType == 'apple') {
 set tartist to (get artist of the current track)
 set tid to (get id of the current track)
 set pos to player position
-		return { name: tname, duration: tdur, artist:tartist, id: tid, position:pos }
+set stat to player state
+		return { name: tname, duration: tdur, artist:tartist, id: tid, position:pos, state:stat }
 	end if
 end tell`)
       .then((rtn) => {
+        activity.startTimestamp = moment(openTimestamp).add('-' + rtn.position, 's').toDate();
         activity.details = rtn.name
         activity.state = rtn.artist
         //activity.spectateSecret = "https://apple.com/music",
+        if (rtn.state !== 'paused') {
         activity.endTimestamp = moment(openTimestamp).add(rtn.duration, 's').toDate();
-        if (!oldID) {
+      } else {
+        activity.endTimestamp = moment(new Date()).add(rtn.position, 's').toDate();
+        console.log(activity.endTimestamp)
+      }
+        if (!oldID || !oldPos) {
           oldID = rtn.id
+          oldPos = rtn.position
           console.log('Set initial ID successfully.');
           rpc.setActivity(activity);
         }
-        if (oldID !== rtn.id) {
+        if (oldID !== rtn.id || oldPos !== rtn.position) {
           oldID = rtn.id
-          console.log('New song detected, updating Rich Presence.')
+          oldPos = rtn.position
+          console.log('New song/position detected, updating Rich Presence.')
           rpc.setActivity(activity);
         }
       })
