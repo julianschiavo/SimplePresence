@@ -9,7 +9,6 @@ body, html {
 #emoji {
   /*height: 60%;*/
   display: grid;
-  font-size: 350%;
   margin: auto;
   text-align: center;
   -webkit-user-select: none;
@@ -17,6 +16,9 @@ body, html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+#hide {
+  font-size: 450%;
 }
 .center, h2 {
   text-align: center;
@@ -33,8 +35,8 @@ h6 {
   margin-top: -10px!important
 }
 h1, h2, h3, h4, h5, h6 {
-  color: black;
--webkit-user-select: none;
+  color: white;
+  -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -47,7 +49,7 @@ h6 {
   -ms-user-select: none;
   user-select: none;
 }
-.table > .item {
-width:50%!important;
-float: left;
+#artwork {
+  width: 20%!important;
+  border-radius: 20%
 }

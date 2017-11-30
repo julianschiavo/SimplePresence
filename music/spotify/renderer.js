@@ -6,6 +6,10 @@ if (require('../config.json').musicType == 'spotify') {
   const spotify = new nodeSpotifyWebhelper.SpotifyWebHelper()
   const parse = require('parse-duration')
   const moment = require('moment')
+  const os = require('os');
+  if (os.type() !== 'Darwin') {
+    document.body.style.backgroundColor = '#4C4C4C'
+  }
 
   webFrame.setZoomLevelLimits(1, 1);
 
@@ -33,7 +37,7 @@ if (require('../config.json').musicType == 'spotify') {
     })
   }
 
-  document.getElementById('service')[text] = "Spotify"
+  //document.getElementById('service')[text] = "Spotify"
   setInterval(() => {
     setSpotify();
   }, 1000);

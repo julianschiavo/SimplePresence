@@ -28,16 +28,17 @@ if (config.musicType == 'spotify') {
 
   function createWindow() {
     var width = 600 //320
-    var height = 330 //500
+    var height = 430 //500
     mainWindow = new BrowserWindow({
       width: width,
       height: height,
       resizable: false,
-      titleBarStyle: 'hidden',
-      vibrancy: 'light',
+      titleBarStyle: 'customButtonsOnHover',
+      vibrancy: 'ultra-dark',
       hasShadow: false,
+      show: false,
       frame: false,
-      show: false
+      fullscreen: false
     });
 
     mainWindow.on('ready-to-show', () => {
@@ -73,6 +74,7 @@ if (config.musicType == 'spotify') {
   });
 
   var oldID
+  var oldState
   var songName = undefined;
 
   async function setActivity() {
@@ -85,30 +87,54 @@ if (config.musicType == 'spotify') {
       instance: false
     }
 
-    if (!openTimestamp) {
-      var openTimestamp = new Date();
+    if (!time) {
+      var time = new Date();
     }
 
-    activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
+    //activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
 
     spotify.getStatus(function(err, res) {
       if (err) return console.error(err);
-      if (res.track.track_resource && res.track.track_resource.name && res.track.track_resource.name != songName) {
+      if (res.track.track_resource && res.track.track_resource.name) {
         //activity.startTimestamp = new Date(new Date() - (res.playing_position * 1000));
         //activity.startTimestamp = moment(openTimestamp).add(res.playing_position * 100, 's').toDate();
-        activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
-        activity.endTimestamp = moment(openTimestamp).add(res.track.length, 's').toDate();
-        //console.log(res.track)
-        activity.details = res.track.track_resource.name
-        activity.state = res.track.artist_resource.name
-        songName = res.track.track_resource.name;
+        if (rtn.track.track_resource.name) {
+          activity.details = res.track.track_resource.name
+        } else {
+          activity.details = "No Song Found"
+        }
+        if (res.track.artist_resource.name) {
+          activity.state = res.track.artist_resource.name
+        } else {
+          activity.state = "No Artist Found"
+        }
+        if (res.playing_position) {
+          activity.startTimestamp = moment(time).subtract(res.playing_position, 's').toDate()
+          if (res.track.length) {
+            activity.endTimestamp = moment(time).add(res.track.length - res.playing_position, 's').toDate()
+          }
+        }
+
+        if (res.playing == true) {
+          activity.smallImageKey = undefined
+          activity.smallImageText = undefined
+        } else {
+          activity.smallImageKey = 'icon-pause'
+          activity.smallImageText = 'Paused'
+          activity.startTimestamp = undefined
+          activity.endTimestamp = undefined
+          //activity.endTimestamp = moment(time).add('0', 's').toDate();
+          //activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
+        }
         if (!oldID) {
           oldID = res.track
-          console.log('Set initial track successfully.');
+          oldState = res.playing
+          console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
         }
-        if (oldID !== res.track) {
+        if (oldID !== res.track || oldState !== res.playing) {
           oldID = res.track
+          oldState = res.playing
           rpc.setActivity(activity);
           console.log(`[${new Date().toLocaleTimeString()}]: ${res.track.track_resource.name} - Updating Rich Presence.`);
         }

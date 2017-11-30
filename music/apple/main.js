@@ -26,17 +26,20 @@ if (config.musicType == 'apple') {
 
   function createWindow() {
     var width = 600 //320
-    var height = 330 //500
+    var height = 430 //500
     mainWindow = new BrowserWindow({
       width: width,
       height: height,
       resizable: false,
-      titleBarStyle: 'hidden',
-      vibrancy: 'light',
+      titleBarStyle: 'customButtonsOnHover',
+      vibrancy: 'ultra-dark',
       hasShadow: false,
+      show: false,
       frame: false,
-      show: false
+      fullscreen: false
     });
+
+    mainWindow.titleBarStyle = 'hiddenInset'
 
     mainWindow.on('ready-to-show', () => {
       mainWindow.show()
@@ -71,62 +74,87 @@ if (config.musicType == 'apple') {
   });
 
   var oldID
-  var oldPos
-  var timer
+  var oldState
 
   async function setActivity() {
     if (!rpc || !mainWindow)
       return;
 
     var activity = {
-      largeImageKey: 'music',
+      largeImageKey: 'apple',
       largeImageText: 'Apple Music',
       instance: false
     }
 
-    if (!openTimestamp) {
-      var openTimestamp = new Date();
+    if (!time) {
+      var time = new Date();
     }
 
     //activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
     applescript(`tell application "iTunes"
-	if player state is playing or player state is paused then
-		set tname to (get name of the current track)
-                set tdur to (get duration of the current track)
-set tartist to (get artist of the current track)
-set tid to (get id of the current track)
+if player state is playing or player state is paused then
+set tname to current track's name
+set tdur to current track's finish
+set tartist to current track's artist
+set tid to current track's id
+set luv to current track's loved
 set pos to player position
 set stat to player state
-		return { name: tname, duration: tdur, artist:tartist, id: tid, position:pos, state:stat }
-	end if
+return { name: tname, duration: tdur, artist:tartist, id: tid, position:pos, state:stat, loved:luv }
+end if
 end tell`)
       .then((rtn) => {
-        activity.startTimestamp = moment(openTimestamp).add('-' + rtn.position, 's').toDate();
-        activity.details = rtn.name
-        activity.state = rtn.artist
-        activity.endTimestamp = moment(openTimestamp).add(rtn.duration, 's').toDate();
-        //activity.spectateSecret = "https://apple.com/music",
-        /*if (rtn.state !== 'paused') {
-        activity.endTimestamp = moment(openTimestamp).add(rtn.duration, 's').toDate();
-      } else {
-        activity.endTimestamp = moment(new Date()).add(rtn.position, 's').toDate();
-        console.log(activity.endTimestamp)
-      }*/
-        if (!oldID || !oldPos) {
+        //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+        //activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
+        //activity.spectateSecret = "https://apple.com/music"
+        if (rtn.name) {
+          activity.details = rtn.name
+        } else {
+          activity.details = "No Song Found"
+        }
+        if (rtn.artist) {
+          activity.state = rtn.artist
+        } else {
+          activity.state = "No Artist Found"
+        }
+        if (rtn.position) {
+          activity.startTimestamp = moment(time).subtract(rtn.position, 's').toDate()
+        }
+        if (rtn.duration) {
+          activity.endTimestamp = moment(time).add(rtn.duration - rtn.position, 's').toDate()
+        }
+        if (rtn.state !== 'paused') {
+          if (rtn.loved == false) {
+            activity.smallImageKey = undefined
+            activity.smallImageText = undefined
+          } else {
+            activity.smallImageKey = 'icon-heart'
+            activity.smallImageText = 'Loved'
+          }
+        } else {
+          activity.smallImageKey = 'icon-pause'
+          activity.smallImageText = 'Paused'
+          activity.startTimestamp = undefined
+          activity.endTimestamp = undefined
+          //activity.endTimestamp = moment(time).add('0', 's').toDate();
+          //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+        }
+
+        if (!oldID) {
           oldID = rtn.id
-          oldPos = rtn.position
-          console.log('Set initial ID successfully.');
+          oldState = rtn.state
+          console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
         }
-        if (oldID !== rtn.id || oldPos !== rtn.position) {
+        if (oldID !== rtn.id || oldState !== rtn.state) {
           oldID = rtn.id
-          oldPos = rtn.position
-          console.log('New song/position detected, updating Rich Presence.')
+          oldState = rtn.state
+          console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, updating Rich Presence.`)
           rpc.setActivity(activity);
         }
       })
       .catch((error) => {
-        console.log('error:', error);
+        console.log(error);
       });
   }
 
