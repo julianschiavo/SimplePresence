@@ -98,7 +98,7 @@ if (config.musicType == 'spotify') {
       if (res.track.track_resource && res.track.track_resource.name) {
         //activity.startTimestamp = new Date(new Date() - (res.playing_position * 1000));
         //activity.startTimestamp = moment(openTimestamp).add(res.playing_position * 100, 's').toDate();
-        if (rtn.track.track_resource.name) {
+        if (res.track.track_resource.name) {
           activity.details = res.track.track_resource.name
         } else {
           activity.details = "No Song Found"
