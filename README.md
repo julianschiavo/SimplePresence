@@ -10,7 +10,7 @@ It has a config for default strings, which can then be changed through the app a
 [![Example](example.png)]()
 
 ## Wiki
-All instructions for setup, customization, and usage of EasyRPC are in our Wiki. [Press here to see it.](https://github.com/justdotJS/SimplePresence/wiki/)
+All instructions for setup, customization, and usage of SimplePresence are in our Wiki. [Press here to see it.](https://github.com/justdotJS/SimplePresence/wiki/)
 
 ## Thanks
 Thanks to **[devsnek](https://github.com/devsnek)** for his original Rich Presence example, which helped with much of the base code used for EasyRPC.
