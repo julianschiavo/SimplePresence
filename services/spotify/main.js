@@ -80,7 +80,6 @@ if (config.serviceConfig.whichService == 'spotify') {
 
   var oldID
   var oldState
-  var songName = undefined;
 
   async function setActivity() {
     if (!rpc || !mainWindow)
@@ -100,7 +99,7 @@ if (config.serviceConfig.whichService == 'spotify') {
 
     spotify.getStatus(function(err, res) {
       if (err) return console.error(err);
-      if (res.track && res.track.track_resource && res.track.track_resource.name) {
+      if (res.track.track_resource && res.track.track_resource.name) {
         //activity.startTimestamp = new Date(new Date() - (res.playing_position * 1000));
         //activity.startTimestamp = moment(openTimestamp).add(res.playing_position * 100, 's').toDate();
         if (res.track.track_resource.name) {
@@ -119,7 +118,6 @@ if (config.serviceConfig.whichService == 'spotify') {
             activity.endTimestamp = moment(time).add(res.track.length - res.playing_position, 's').toDate()
           }
         }
-
         if (res.playing == true) {
           activity.smallImageKey = undefined
           activity.smallImageText = undefined
@@ -132,18 +130,17 @@ if (config.serviceConfig.whichService == 'spotify') {
           //activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
         }
         if (!oldID) {
-          oldID = res.track
+          oldID = res.track.track_resource.uri
           oldState = res.playing
           console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
         }
-        if (oldID !== res.track || oldState !== res.playing) {
-          oldID = res.track
+        if (oldID !== res.track.track_resource.uri || oldState !== res.playing) {
+          oldID = res.track.track_resource.uri
           oldState = res.playing
           rpc.setActivity(activity);
           console.log(`[${new Date().toLocaleTimeString()}]: ${res.track.track_resource.name} - Updating Rich Presence.`);
         }
-
       }
     })
   }
