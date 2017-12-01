@@ -139,7 +139,7 @@ if (config.serviceConfig.whichService == 'spotify') {
           oldID = res.track.track_resource.uri
           oldState = res.playing
           rpc.setActivity(activity);
-          console.log(`[${new Date().toLocaleTimeString()}]: ${res.track.track_resource.name} - Updating Rich Presence.`);
+          console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, Updating Rich Presence.`);
         }
       }
     })
