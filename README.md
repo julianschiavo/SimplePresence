@@ -3,14 +3,14 @@
 [![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)](https://dotjs.party/donate)
 [![Website](https://img.shields.io/badge/go_to-site-000000.svg?style=flat-square)](https://dotjs.party)
 
-# EasyRPC
-EasyRPC is an Electron app for macOS, Windows, and Linux that allows users to easily set their Discord Rich Presence Status.
+# SimplePresence
+SimplePresence is an Electron app for macOS, Windows, and Linux that allows users to easily set their Discord Rich Presence Status.
 It has a config for default strings, which can then be changed through the app at any time.
 
 [![Example](example.png)]()
 
 ## Wiki
-All instructions for setup, customization, and usage of EasyRPC are in our Wiki. [Press here to see it.](https://github.com/justdotJS/EasyRPC/wiki/)
+All instructions for setup, customization, and usage of EasyRPC are in our Wiki. [Press here to see it.](https://github.com/justdotJS/SimplePresence/wiki/)
 
 ## Thanks
 Thanks to **[devsnek](https://github.com/devsnek)** for his original Rich Presence example, which helped with much of the base code used for EasyRPC.
