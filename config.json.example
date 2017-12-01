@@ -1,7 +1,7 @@
 {
 "textConfig": {
 "details": "working on a bot",
-"state": "using discord.js"
+"state": "adding more support"
 },
 "imageConfig": {
 "smallKey": "nodejs",
@@ -14,6 +14,14 @@
 "timeType": "none",
 "whatTime": "0s"
 },
-"musicType":"none",
+"serviceConfig": {
+"whichService": "none",
+"customClientID": "none",
+"lastFM": {
+  "key": "",
+  "secret": "",
+  "username": ""
+}
+},
 "clientID": "340755371629215744"
 }

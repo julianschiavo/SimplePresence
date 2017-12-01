@@ -2,10 +2,12 @@ body, html {
   margin: 0px;
   height: 100%;
   cursor: default;
+  border-radius: 20%;
   font-family: sans-serif;
   -webkit-touch-callout: none;
   -webkit-app-region: drag;
 }
+
 #emoji {
   /*height: 60%;*/
   display: grid;
@@ -17,23 +19,29 @@ body, html {
   -ms-user-select: none;
   user-select: none;
 }
+
 #hide {
   font-size: 450%;
 }
+
 .center, h2 {
   text-align: center;
 }
+
 a {
   text-align: center;
   text-decoration: underline
 }
+
 h6 {
   margin-top: 20px!important;
   margin-bottom: -17px!important
 }
+
 .low {
   margin-top: -10px!important
 }
+
 h1, h2, h3, h4, h5, h6 {
   color: white;
   -webkit-user-select: none;
@@ -42,6 +50,7 @@ h1, h2, h3, h4, h5, h6 {
   -ms-user-select: none;
   user-select: none;
 }
+
 h6 {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -49,7 +58,12 @@ h6 {
   -ms-user-select: none;
   user-select: none;
 }
+
 #artwork {
-  width: 20%!important;
+  width: 20%;
   border-radius: 20%
+}
+
+#id,#idh,.imdb {
+  display:none
 }

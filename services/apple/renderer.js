@@ -1,4 +1,4 @@
-if (require('../config.json').musicType == 'apple') {
+if (require('../config.json').serviceConfig.serviceType == 'apple') {
   const {
     webFrame
   } = require('electron');

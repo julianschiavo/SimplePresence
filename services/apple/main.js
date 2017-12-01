@@ -1,13 +1,11 @@
 /* eslint-disable no-console */
 const config = require('../../config.json');
-if (config.musicType == 'spotify') {
-  const nodeSpotifyWebhelper = require('node-spotify-webhelper')
-  const spotify = new nodeSpotifyWebhelper.SpotifyWebHelper()
+if (config.serviceConfig.whichService == 'apple') {
+  const applescript = require('osascript-promise');
 
   process.on('unhandledRejection', (err) => {
     console.error(err);
   });
-
 
   const {
     app,
@@ -22,7 +20,13 @@ if (config.musicType == 'spotify') {
   const parse = require('parse-duration')
   const moment = require('moment')
 
-  const ClientId = "327592981580349440";
+  var ClientId
+  if (config.serviceConfig.customClientID == 'none') {
+    ClientId = "327592981580349440";
+  } else {
+    ClientId = config.serviceConfig.customClientID
+  }
+
 
   let mainWindow;
 
@@ -40,6 +44,8 @@ if (config.musicType == 'spotify') {
       frame: false,
       fullscreen: false
     });
+
+    mainWindow.titleBarStyle = 'hiddenInset'
 
     mainWindow.on('ready-to-show', () => {
       mainWindow.show()
@@ -75,15 +81,14 @@ if (config.musicType == 'spotify') {
 
   var oldID
   var oldState
-  var songName = undefined;
 
   async function setActivity() {
     if (!rpc || !mainWindow)
       return;
 
     var activity = {
-      largeImageKey: 'spotify',
-      largeImageText: 'Spotify',
+      largeImageKey: 'apple',
+      largeImageText: 'Apple Music',
       instance: false
     }
 
@@ -92,58 +97,75 @@ if (config.musicType == 'spotify') {
     }
 
     //activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
-
-    spotify.getStatus(function(err, res) {
-      if (err) return console.error(err);
-      if (res.track.track_resource && res.track.track_resource.name) {
-        //activity.startTimestamp = new Date(new Date() - (res.playing_position * 1000));
-        //activity.startTimestamp = moment(openTimestamp).add(res.playing_position * 100, 's').toDate();
-        if (res.track.track_resource.name) {
-          activity.details = res.track.track_resource.name
+    applescript(`tell application "iTunes"
+if player state is playing or player state is paused then
+set tname to current track's name
+set tdur to current track's finish
+set tartist to current track's artist
+set tid to current track's id
+set luv to current track's loved
+set pos to player position
+set stat to player state
+return { name: tname, duration: tdur, artist:tartist, id: tid, position:pos, state:stat, loved:luv }
+end if
+end tell`)
+      .then((rtn) => {
+        //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+        //activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
+        //activity.spectateSecret = "https://apple.com/music"
+        if (rtn.name) {
+          activity.details = rtn.name
         } else {
-          activity.details = "No Song Found"
+          activity.details = "No Song"
         }
-        if (res.track.artist_resource.name) {
-          activity.state = res.track.artist_resource.name
+        if (rtn.artist) {
+          activity.state = rtn.artist
         } else {
-          activity.state = "No Artist Found"
+          activity.state = "No Artist"
         }
-        if (res.playing_position) {
-          activity.startTimestamp = moment(time).subtract(res.playing_position, 's').toDate()
-          if (res.track.length) {
-            activity.endTimestamp = moment(time).add(res.track.length - res.playing_position, 's').toDate()
+        if (rtn.position) {
+          activity.startTimestamp = moment(time).subtract(rtn.position, 's').toDate()
+        }
+        if (rtn.duration) {
+          activity.endTimestamp = moment(time).add(rtn.duration - rtn.position, 's').toDate()
+        }
+        if (rtn.state !== 'paused') {
+          if (rtn.loved == false) {
+            activity.smallImageKey = undefined
+            activity.smallImageText = undefined
+          } else {
+            activity.smallImageKey = 'icon-heart'
+            activity.smallImageText = 'Loved'
           }
-        }
-
-        if (res.playing == true) {
-          activity.smallImageKey = undefined
-          activity.smallImageText = undefined
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
           activity.startTimestamp = undefined
           activity.endTimestamp = undefined
           //activity.endTimestamp = moment(time).add('0', 's').toDate();
-          //activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
+          //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
         }
+
         if (!oldID) {
-          oldID = res.track
-          oldState = res.playing
+          oldID = rtn.id
+          oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
         }
-        if (oldID !== res.track || oldState !== res.playing) {
-          oldID = res.track
-          oldState = res.playing
+        if (oldID !== rtn.id || oldState !== rtn.state) {
+          oldID = rtn.id
+          oldState = rtn.state
+          console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, updating Rich Presence.`)
           rpc.setActivity(activity);
-          console.log(`[${new Date().toLocaleTimeString()}]: ${res.track.track_resource.name} - Updating Rich Presence.`);
         }
-
-      }
-    })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   rpc.on('ready', () => {
+
     rpc.subscribe('ACTIVITY_SPECTATE', ({
       secret
     }) => {
@@ -151,11 +173,16 @@ if (config.musicType == 'spotify') {
     });
 
     setActivity();
-
     setInterval(() => {
       setActivity();
     }, 1000);
   });
-
+  setActivity();
+  setInterval(() => {
+    setActivity();
+  }, 1000);
   rpc.login(ClientId).catch(console.error);
+} else {
+  console.log("Please set 'whichService' to 'apple' in 'config.json' to use SimplePresence + Apple Music.");
+  process.exit(0);
 }
