@@ -1,17 +1,17 @@
 {
-  "name": "EasyRPC",
-  "version": "1.6.1",
+  "name": "SimplePresence",
+  "version": "1.6.2",
   "description": "An easy and simple way to set your Discord Rich Presence Status through RPC (no token required)",
   "main": "main/main.js",
   "author": "dotJS",
   "license": "MIT",
-  "homepage": "https://github.com/justdotJS/EasyRPC#readme",
+  "homepage": "https://github.com/justdotJS/SimplePresence#readme",
   "bugs": {
-    "url": "https://github.com/justdotJS/EasyRPC/issues"
+    "url": "https://github.com/justdotJS/SimplePresence/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/justdotJS/EasyRPC.git"
+    "url": "git+https://github.com/justdotJS/SimplePresence.git"
   },
   "scripts": {
     "start": "electron main/main.js",
