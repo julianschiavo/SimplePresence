@@ -18,7 +18,7 @@
 
 ## **Do you have questions about the source code?**
 
-* Ask any question about how to use EasyRPC in the [Discord chat](https://discord.gg/MpnbrX7).
+* Ask any question about how to use SimplePresence in the [Discord chat](https://discord.gg/MpnbrX7).
 
 ## **Do you need support?**
 
