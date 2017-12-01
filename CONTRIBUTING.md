@@ -24,4 +24,4 @@
 
 * If it's a bug, read **Did you find a bug?** above.
 
-* If it's just that you don't understand how to do something, or you're not sure, [read the wiki](https://github.com/justdotJS/EasyRPC/wiki) or [ask in the Discord chat](https://discord.gg/MpnbrX7).
+* If it's just that you don't understand how to do something, or you're not sure, [read the wiki](https://github.com/justdotJS/SimplePresence/wiki) or [ask in the Discord chat](https://discord.gg/MpnbrX7).
