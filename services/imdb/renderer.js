@@ -27,20 +27,28 @@ if (require('../config.json').serviceConfig.whichService == 'imdb') {
       }
 
       if (data) {
-        document.getElementById('name')[text] = data.title
-        document.getElementById('artwork').src = data.poster
-        if (document.getElementById('artwork').src) {
-          document.getElementById('hide').style.display = 'none'
-        }
-        document.getElementById('artisth')[text] = "year"
-        document.getElementById('artist')[text] = data.year
+
         if (!oldID) {
           oldID = id
+          document.getElementById('name')[text] = data.title
+          document.getElementById('artwork').src = data.poster
+          if (document.getElementById('artwork').src) {
+            document.getElementById('hide').style.display = 'none'
+          }
+          document.getElementById('artisth')[text] = "year"
+          document.getElementById('artist')[text] = data.year
           openTimestamp = new Date();
           document.getElementById('time')[text] = data.runtime.toString()
         }
         if (oldID !== id) {
           oldID = id
+          document.getElementById('name')[text] = data.title
+          document.getElementById('artwork').src = data.poster
+          if (document.getElementById('artwork').src) {
+            document.getElementById('hide').style.display = 'none'
+          }
+          document.getElementById('artisth')[text] = "year"
+          document.getElementById('artist')[text] = data.year
           openTimestamp = new Date();
           document.getElementById('time')[text] = data.runtime.toString()
         }

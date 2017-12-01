@@ -164,6 +164,6 @@ if (config.serviceConfig.whichService == 'spotify') {
 
   rpc.login(ClientId).catch(console.error);
 } else {
-  console.log("Please set 'musicType' to 'whichService' in 'config.json' to use SimplePresence + Spotify.");
+  console.log("Please set 'whichService' to 'spotify' in 'config.json' to use SimplePresence + Spotify.");
   process.exit(0);
 }
