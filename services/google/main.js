@@ -116,12 +116,12 @@ if (config.serviceConfig.whichService == 'google') {
     }
 
     if (musicContent.song.title !== null) {
-      activity.details = musicContent.song.title
+      activity.details = `🎵  ${musicContent.song.title}`
     } else {
       activity.details = "No Song"
     }
     if (musicContent.song.artist !== null) {
-      activity.state = musicContent.song.artist
+      activity.state = `👤  ${musicContent.song.artist}`
     } else {
       activity.state = "No Artist"
     }
