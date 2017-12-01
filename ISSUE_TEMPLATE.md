@@ -1,12 +1,17 @@
 ## Checklist
 [ ] I am on the latest version
+
 [ ] I am on the latest version of dependencies
+
 [ ] I am on the latest version of Discord
-[ ] I have followed the instructions in the [Wiki](https://github.com/justdotJS/EasyRPC/wiki)
+
+[ ] I have followed the instructions in the [Wiki](https://github.com/justdotJS/SimplePresence/wiki)
 
 ## Type
 Please select what type of issue this is. Please do not use Issues for Support, [ask on the Discord](https://discord.gg/MpnbrX7)!
+
 [ ] Feature Request
+
 [ ] Bug Report
 
 ## Description
