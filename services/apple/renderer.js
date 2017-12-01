@@ -1,4 +1,4 @@
-if (require('../config.json').serviceConfig.serviceType == 'apple') {
+if (require('../config.json').serviceConfig.whichService == 'apple') {
   const {
     webFrame
   } = require('electron');
