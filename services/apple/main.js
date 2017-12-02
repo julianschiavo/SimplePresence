@@ -138,6 +138,7 @@ end tell`)
           }
         } else if ((oldID !== rtn.id || !oldID) && rtn.duration) {
           activity.startTimestamp = moment(time).subtract('0', 's').toDate()
+          activity.endTimestamp = moment(time).add(rtn.duration - 0, 's').toDate()
         }
 
 

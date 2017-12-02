@@ -127,6 +127,7 @@ if (config.serviceConfig.whichService == 'spotify') {
           }
         } else if ((oldID !== res.track.track_resource.uri || !oldID) && res.track.length) {
           activity.startTimestamp = moment(time).subtract('0', 's').toDate()
+          activity.endTimestamp = moment(time).add(res.track.length - 0, 's').toDate()
         }
         if (res.playing == true) {
           activity.smallImageKey = undefined

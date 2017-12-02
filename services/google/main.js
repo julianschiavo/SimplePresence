@@ -116,6 +116,7 @@ if (config.serviceConfig.whichService == 'google') {
       }
     } else if ((oldID !== musicContent.song.albumArt || !oldID) && musicContent.time.total) {
       activity.startTimestamp = moment(time).subtract('0', 's').toDate()
+      activity.endTimestamp = moment(time).add(musicContent.time.total - 0, 'ms').toDate()
     }
     var tP = ''
     if (config.serviceConfig.titlePrefix) {
