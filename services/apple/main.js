@@ -133,10 +133,14 @@ end tell`)
         }
         if (rtn.position) {
           activity.startTimestamp = moment(time).subtract(rtn.position, 's').toDate()
+          if (rtn.duration) {
+            activity.endTimestamp = moment(time).add(rtn.duration - rtn.position, 's').toDate()
+          }
+        } else if ((oldID !== rtn.id || !oldID) && rtn.duration) {
+          activity.startTimestamp = moment(time).subtract('0', 's').toDate()
         }
-        if (rtn.duration) {
-          activity.endTimestamp = moment(time).add(rtn.duration - rtn.position, 's').toDate()
-        }
+
+
         if (rtn.state !== 'paused') {
           if (rtn.loved == false) {
             activity.smallImageKey = undefined

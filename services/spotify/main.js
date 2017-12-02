@@ -125,6 +125,8 @@ if (config.serviceConfig.whichService == 'spotify') {
           if (res.track.length) {
             activity.endTimestamp = moment(time).add(res.track.length - res.playing_position, 's').toDate()
           }
+        } else if ((oldID !== res.track.track_resource.uri || !oldID) && res.track.length) {
+          activity.startTimestamp = moment(time).subtract('0', 's').toDate()
         }
         if (res.playing == true) {
           activity.smallImageKey = undefined
