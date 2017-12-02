@@ -40,18 +40,6 @@ if (require('../config.json').serviceConfig.whichService == 'lastfm') {
 
       document.getElementById('name')[text] = tP + song.name
       document.getElementById('artist')[text] = aP + song.artist["#text"]
-
-    var activity = {
-      largeImageKey: 'lastfm',
-      largeImageText: 'lastFM',
-      details: song.name,
-      state: song.artist["#text"],
-      instance: false
-    }
-
-    rpc.setActivity(activity)
-
-    console.log(song)
   });
 
   trackStream.start();
