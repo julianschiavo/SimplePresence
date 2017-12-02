@@ -139,10 +139,13 @@ if (config.serviceConfig.whichService == 'google') {
   } else {
     activity.smallImageKey = 'icon-pause'
     activity.smallImageText = 'Paused'
-    //activity.startTimestamp = undefined
-    //activity.endTimestamp = undefined
-    activity.endTimestamp = moment(time).add('0', 's').toDate();
-    activity.startTimestamp = moment(time).add('-' + musicContent.time.current, 'ms').toDate();
+    if (musicContent.time.current && musicContent.time.total) {
+      activity.endTimestamp = moment(time).add('0', 's').toDate();
+      activity.startTimestamp = moment(time).add('-' + musicContent.time.current, 'ms').toDate();
+    } else {
+      activity.startTimestamp = undefined
+      activity.endTimestamp = undefined
+    }
   }
 
 

@@ -3,8 +3,8 @@ const config = require('../../config.json');
 if (config.serviceConfig.whichService == 'lastfm') {
   const events = require('events');
   const fm = require('lastfm').LastFmNode;
-  if(!config.musicConfig.lastFM.username) { console.log("Please ensure you have set your 'username', 'key', and 'secret' in 'config.json' to use EasyRPC + lastFM."); process.exit(0); }
-  const lastFm = new fm({ api_key: config.musicConfig.lastFM.key, secret: config.musicConfig.lastFM.secret, useragent: 'EasyRPC' });
+  if(!config.serviceConfig.lastFM.username) { console.log("Please ensure you have set your 'username', 'key', and 'secret' in 'config.json' to use EasyRPC + lastFM."); process.exit(0); }
+  const lastFm = new fm({ api_key: config.serviceConfig.lastFM.key, secret: config.serviceConfig.lastFM.secret, useragent: 'EasyRPC' });
   var songEmitter = new events.EventEmitter()
 
   process.on('unhandledRejection', (err) => {
@@ -78,7 +78,7 @@ if (config.serviceConfig.whichService == 'lastfm') {
     transport: 'ipc'
   });
 
-  var trackStream = lastFm.stream(config.musicConfig.lastFM.username);
+  var trackStream = lastFm.stream(config.serviceConfig.lastFM.username);
 
   trackStream.on('nowPlaying', song => {
     if (!rpc || !mainWindow)
