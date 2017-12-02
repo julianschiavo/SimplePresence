@@ -22,9 +22,6 @@ if (require('../config.json').serviceConfig.whichService == 'lastfm') {
   var trackStream = lastFm.stream(require('../config.json').serviceConfig.lastFM.username);
 
   trackStream.on('nowPlaying', song => {
-    if (!rpc || !mainWindow)
-      return;
-
       if (song.image["#text"]) {
         document.getElementById('artwork').src = song.image["#text"]
         if (document.getElementById('artwork').src) {
