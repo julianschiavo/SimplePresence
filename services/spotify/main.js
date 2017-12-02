@@ -124,10 +124,10 @@ if (config.serviceConfig.whichService == 'spotify') {
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          activity.startTimestamp = undefined
-          activity.endTimestamp = undefined
-          //activity.endTimestamp = moment(time).add('0', 's').toDate();
-          //activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
+          //activity.startTimestamp = undefined
+          //activity.endTimestamp = undefined
+          activity.endTimestamp = moment(time).add('0', 's').toDate();
+          activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
         }
         if (!oldID) {
           oldID = res.track.track_resource.uri
