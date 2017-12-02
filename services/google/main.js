@@ -140,7 +140,7 @@ if (config.serviceConfig.whichService == 'google') {
     activity.smallImageKey = 'icon-pause'
     activity.smallImageText = 'Paused'
     if (musicContent.time.current && musicContent.time.total) {
-      activity.endTimestamp = moment(time).add('0', 's').toDate();
+      activity.endTimestamp = moment(time).add('0', 'ms').toDate();
       activity.startTimestamp = moment(time).add('-' + musicContent.time.current, 'ms').toDate();
     } else {
       activity.startTimestamp = undefined
