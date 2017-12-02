@@ -8,11 +8,6 @@ if (config.serviceConfig.whichService == 'spotify') {
     console.error(err);
   });
 
-
-  const {
-    app,
-    BrowserWindow
-  } = require('electron');
   const open = require("open");
   const os = require('os');
   const path = require('path');
@@ -30,7 +25,11 @@ if (config.serviceConfig.whichService == 'spotify') {
   }
 
   let mainWindow;
-
+  if (config.serviceConfig.useUserInterface == true) {
+  const {
+    app,
+    BrowserWindow
+  } = require('electron');
   function createWindow() {
     var width = 600 //320
     var height = 430 //500
@@ -71,6 +70,7 @@ if (config.serviceConfig.whichService == 'spotify') {
     if (mainWindow === null)
       createWindow();
   });
+}
 
   DiscordRPC.register(ClientId);
 
@@ -82,7 +82,7 @@ if (config.serviceConfig.whichService == 'spotify') {
   var oldState
 
   async function setActivity() {
-    if (!rpc || !mainWindow)
+    if (!rpc || (config.serviceConfig.useUserInterface == true && !mainWindow))
       return;
 
     var activity = {
@@ -102,13 +102,21 @@ if (config.serviceConfig.whichService == 'spotify') {
       if (res.track.track_resource && res.track.track_resource.name) {
         //activity.startTimestamp = new Date(new Date() - (res.playing_position * 1000));
         //activity.startTimestamp = moment(openTimestamp).add(res.playing_position * 100, 's').toDate();
+        var tP = ''
+        if (config.serviceConfig.titlePrefix) {
+          tP = config.serviceConfig.titlePrefix + ' '//.charAt(0);
+        }
+        var aP = ''
+        if (config.serviceConfig.artistPrefix) {
+           aP = config.serviceConfig.artistPrefix + ' '//.charAt(0);
+        }
         if (res.track.track_resource.name) {
-          activity.details = res.track.track_resource.name
+          activity.details = tP + res.track.track_resource.name
         } else {
           activity.details = "No Song"
         }
         if (res.track.artist_resource.name) {
-          activity.state = res.track.artist_resource.name
+          activity.state = aP + res.track.artist_resource.name
         } else {
           activity.state = "No Artist"
         }

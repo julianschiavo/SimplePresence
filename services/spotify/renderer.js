@@ -21,8 +21,16 @@ if (require('../config.json').serviceConfig.whichService == 'spotify') {
     spotify.getStatus(function(err, res) {
       if (err) return console.error(err);
       if (res.track.track_resource && res.track.track_resource.name) {
-        document.getElementById('name')[text] = res.track.track_resource.name
-        document.getElementById('artist')[text] = res.track.artist_resource.name
+        var tP = ''
+        if (require('../config.json').serviceConfig.titlePrefix) {
+          tP = require('../config.json').serviceConfig.titlePrefix + ' '//.charAt(0);
+        }
+        var aP = ''
+        if (require('../config.json').serviceConfig.artistPrefix) {
+           aP = require('../config.json').serviceConfig.artistPrefix + ' '//.charAt(0);
+        }
+        document.getElementById('name')[text] = tP + res.track.track_resource.name
+        document.getElementById('artist')[text] = aP + res.track.artist_resource.name
         if (!oldID) {
           oldID = res.track
           openTimestamp = new Date();

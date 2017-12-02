@@ -16,7 +16,11 @@
 },
 "serviceConfig": {
 "whichService": "none",
+"titlePrefix": "",
+"artistPrefix": "",
+"useUserInterface": true,
 "customClientID": "none",
+"imdbDefaultID": "tt3659388",
 "lastFM": {
   "key": "",
   "secret": "",

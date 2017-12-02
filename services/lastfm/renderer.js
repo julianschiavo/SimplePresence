@@ -32,8 +32,17 @@ if (require('../config.json').serviceConfig.whichService == 'lastfm') {
         }
       }
 
-      document.getElementById('name')[text] = song.name
-      document.getElementById('artist')[text] = song.artist["#text"]
+      var tP = ''
+      if (require('../config.json').serviceConfig.titlePrefix) {
+        tP = require('../config.json').serviceConfig.titlePrefix + ' '//.charAt(0);
+      }
+      var aP = ''
+      if (require('../config.json').serviceConfig.artistPrefix) {
+         aP = require('../config.json').serviceConfig.artistPrefix + ' '//.charAt(0);
+      }
+
+      document.getElementById('name')[text] = tP + song.name
+      document.getElementById('artist')[text] = aP + song.artist["#text"]
 
     var activity = {
       largeImageKey: 'lastfm',

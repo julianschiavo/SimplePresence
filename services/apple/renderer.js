@@ -46,12 +46,20 @@ set location to "file://" & POSIX path of (path to temporary items) & "tmp" & ex
 
 return { name: tname, duration: tdur, artist:tartist, id: tid, position:pos, artwork:location }`)
       .then((rtn) => {
+        var tP = ''
+        if (require('../config.json').serviceConfig.titlePrefix) {
+          tP = require('../config.json').serviceConfig.titlePrefix + ' '//.charAt(0);
+        }
+        var aP = ''
+        if (require('../config.json').serviceConfig.artistPrefix) {
+           aP = require('../config.json').serviceConfig.artistPrefix + ' '//.charAt(0);
+        }
         document.getElementById('artwork').src = rtn.artwork
         if (document.getElementById('artwork').src) {
           document.getElementById('hide').style.display = 'none'
         }
-        document.getElementById('name')[text] = rtn.name
-        document.getElementById('artist')[text] = rtn.artist
+        document.getElementById('name')[text] = tP + rtn.name
+        document.getElementById('artist')[text] = aP + rtn.artist
         if (!oldID) {
           oldID = rtn.id
           openTimestamp = new Date();

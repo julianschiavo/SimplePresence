@@ -11,10 +11,6 @@ if (config.serviceConfig.whichService == 'lastfm') {
     console.error(err);
   });
 
-  const {
-    app,
-    BrowserWindow
-  } = require('electron');
   const open = require("open");
   const path = require('path');
   const url = require('url');
@@ -30,7 +26,11 @@ if (config.serviceConfig.whichService == 'lastfm') {
   }
 
   let mainWindow;
-
+  if (config.serviceConfig.useUserInterface == true) {
+  const {
+    app,
+    BrowserWindow
+  } = require('electron');
   function createWindow() {
     var width = 600 //320
     var height = 430 //500
@@ -71,6 +71,7 @@ if (config.serviceConfig.whichService == 'lastfm') {
     if (mainWindow === null)
       createWindow();
   });
+}
 
   DiscordRPC.register(ClientId);
 
@@ -81,13 +82,21 @@ if (config.serviceConfig.whichService == 'lastfm') {
   var trackStream = lastFm.stream(config.serviceConfig.lastFM.username);
 
   trackStream.on('nowPlaying', song => {
-    if (!rpc || !mainWindow)
+    if (!rpc || (config.serviceConfig.useUserInterface == true && !mainWindow))
       return;
+      var tP = ''
+      if (config.serviceConfig.titlePrefix) {
+        tP = config.serviceConfig.titlePrefix + ' '//.charAt(0);
+      }
+      var aP = ''
+      if (config.serviceConfig.artistPrefix) {
+         aP = config.serviceConfig.artistPrefix + ' '//.charAt(0);
+      }
     var activity = {
       largeImageKey: 'lastfm',
       largeImageText: 'lastFM',
-      details: song.name,
-      state: song.artist["#text"],
+      details: tP + song.name,
+      state: aP + song.artist["#text"],
       instance: false
     }
 

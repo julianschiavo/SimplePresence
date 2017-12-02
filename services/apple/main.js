@@ -7,10 +7,6 @@ if (config.serviceConfig.whichService == 'apple') {
     console.error(err);
   });
 
-  const {
-    app,
-    BrowserWindow
-  } = require('electron');
   const open = require("open");
   const os = require('os');
   const path = require('path');
@@ -27,51 +23,55 @@ if (config.serviceConfig.whichService == 'apple') {
     ClientId = config.serviceConfig.customClientID
   }
 
-
   let mainWindow;
+  if (config.serviceConfig.useUserInterface == true) {
+    const {
+      app,
+      BrowserWindow
+    } = require('electron');
+    function createWindow() {
+      var width = 600 //320
+      var height = 430 //500
+      mainWindow = new BrowserWindow({
+        width: width,
+        height: height,
+        resizable: false,
+        titleBarStyle: 'customButtonsOnHover',
+        vibrancy: 'ultra-dark',
+        hasShadow: false,
+        show: false,
+        frame: false,
+        fullscreen: false
+      });
 
-  function createWindow() {
-    var width = 600 //320
-    var height = 430 //500
-    mainWindow = new BrowserWindow({
-      width: width,
-      height: height,
-      resizable: false,
-      titleBarStyle: 'customButtonsOnHover',
-      vibrancy: 'ultra-dark',
-      hasShadow: false,
-      show: false,
-      frame: false,
-      fullscreen: false
+      mainWindow.titleBarStyle = 'hiddenInset'
+
+      mainWindow.on('ready-to-show', () => {
+        mainWindow.show()
+      })
+
+      mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, '/../index.html'),
+        protocol: 'file:',
+        slashes: true,
+      }));
+
+      mainWindow.on('closed', () => {
+        mainWindow = null;
+      });
+    }
+
+    app.on('ready', createWindow);
+
+    app.on('window-all-closed', () => {
+      app.quit();
     });
 
-    mainWindow.titleBarStyle = 'hiddenInset'
-
-    mainWindow.on('ready-to-show', () => {
-      mainWindow.show()
-    })
-
-    mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, '/../index.html'),
-      protocol: 'file:',
-      slashes: true,
-    }));
-
-    mainWindow.on('closed', () => {
-      mainWindow = null;
+    app.on('activate', () => {
+      if (mainWindow === null)
+        createWindow();
     });
   }
-
-  app.on('ready', createWindow);
-
-  app.on('window-all-closed', () => {
-    app.quit();
-  });
-
-  app.on('activate', () => {
-    if (mainWindow === null)
-      createWindow();
-  });
 
   DiscordRPC.register(ClientId);
 
@@ -83,7 +83,7 @@ if (config.serviceConfig.whichService == 'apple') {
   var oldState
 
   async function setActivity() {
-    if (!rpc || !mainWindow)
+    if (!rpc || (config.serviceConfig.useUserInterface == true && !mainWindow))
       return;
 
     var activity = {
@@ -113,13 +113,21 @@ end tell`)
         //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
         //activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
         //activity.spectateSecret = "https://apple.com/music"
+        var tP = ''
+        if (config.serviceConfig.titlePrefix) {
+          tP = config.serviceConfig.titlePrefix + ' '//.charAt(0);
+        }
+        var aP = ''
+        if (config.serviceConfig.artistPrefix) {
+           aP = config.serviceConfig.artistPrefix + ' '//.charAt(0);
+        }
         if (rtn.name) {
-          activity.details = rtn.name
+          activity.details = tP + rtn.name
         } else {
           activity.details = "No Song"
         }
         if (rtn.artist) {
-          activity.state = rtn.artist
+          activity.state = aP + rtn.artist
         } else {
           activity.state = "No Artist"
         }

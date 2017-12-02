@@ -34,13 +34,21 @@ if (require('../config.json').serviceConfig.whichService == 'google') {
         document.getElementById('hide').style.display = 'none'
       }
     }
+    var tP = ''
+    if (require('../config.json').serviceConfig.titlePrefix) {
+      tP = require('../config.json').serviceConfig.titlePrefix + ' '//.charAt(0);
+    }
+    var aP = ''
+    if (require('../config.json').serviceConfig.artistPrefix) {
+       aP = require('../config.json').serviceConfig.artistPrefix + ' '//.charAt(0);
+    }
         if (musicContent.song.title) {
-          document.getElementById('name')[text] = musicContent.song.title
+          document.getElementById('name')[text] = tP + musicContent.song.title
         } else {
           document.getElementById('name')[text] = "No Song Found"
         }
         if (musicContent.song.artist) {
-          document.getElementById('artist')[text] = musicContent.song.artist
+          document.getElementById('artist')[text] = aP + musicContent.song.artist
         } else {
           document.getElementById('artist')[text] = "No Artist Found"
         }

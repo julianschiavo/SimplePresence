@@ -6,10 +6,6 @@ if (config.serviceConfig.whichService == 'imdb') {
     console.error(err);
   });
 
-  const {
-    app,
-    BrowserWindow
-  } = require('electron');
   const open = require("open");
   const os = require('os');
   const path = require('path');
@@ -27,7 +23,11 @@ if (config.serviceConfig.whichService == 'imdb') {
   }
 
   let mainWindow;
-
+  if (config.serviceConfig.useUserInterface == true) {
+  const {
+    app,
+    BrowserWindow
+  } = require('electron');
   function createWindow() {
     var width = 600 //320
     var height = 530 //500
@@ -68,6 +68,7 @@ if (config.serviceConfig.whichService == 'imdb') {
     if (mainWindow === null)
       createWindow();
   });
+}
 
   DiscordRPC.register(ClientId);
 
@@ -78,7 +79,7 @@ if (config.serviceConfig.whichService == 'imdb') {
   var oldID
 
   async function setActivity() {
-    if (!rpc || !mainWindow)
+    if (!rpc || (config.serviceConfig.useUserInterface == true && !mainWindow))
       return;
 
     var activity = {
@@ -90,8 +91,13 @@ if (config.serviceConfig.whichService == 'imdb') {
     if (!time) {
       var time = new Date();
     }
+    var id
+    if (config.serviceConfig.useUserInterface == true) {
+      id = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("id")[text];')
+    } else {
+      id = config.serviceConfig.imdbDefaultID
+    }
 
-    var id = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("id")[text];')
 
     imdb(id, function(err, data) {
       if (err) {
