@@ -64,7 +64,7 @@ h6 {
   border-radius: 20%
 }
 
-#id,#idh,.imdb {
+#id,#idh,.imdb,#yt {
   display:none;
     -webkit-app-region: no-drag;
 }

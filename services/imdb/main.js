@@ -95,7 +95,7 @@ if (config.serviceConfig.whichService == 'imdb') {
     if (config.serviceConfig.useUserInterface == true) {
       id = await mainWindow.webContents.executeJavaScript('var text = "textContent" in document.body ? "textContent" : "innerText";document.getElementById("id")[text];')
     } else {
-      id = config.serviceConfig.imdbDefaultID
+      id = config.serviceConfig.IMDB.defaultID
     }
 
 

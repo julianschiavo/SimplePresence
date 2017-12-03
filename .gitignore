@@ -3,3 +3,4 @@ package-lock.json
 docs.json
 config.json
 .DS_Store
+services/youtube/**

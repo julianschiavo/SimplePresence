@@ -1,6 +1,6 @@
 {
   "name": "SimplePresence",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "An easy and simple way to set your Discord Rich Presence Status through RPC!",
   "main": "main/main.js",
   "author": "dotJS",
@@ -19,7 +19,9 @@
     "spotify": "electron services/spotify/main.js",
     "google": "electron services/google/main.js",
     "lastfm": "electron services/lastfm/main.js",
-    "imdb": "electron services/imdb/main.js"
+    "imdb": "electron services/imdb/main.js",
+    "youtube": "electron services/youtube/main.js",
+    "foobar": "electron services/foobar/main.js"
   },
   "dependencies": {
     "@dnode/parse-duration": "^1.4.2",
