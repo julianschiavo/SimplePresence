@@ -15,3 +15,4 @@ All instructions for setup, customization, and usage of SimplePresence are in ou
 ## Thanks
 Thanks to **[devsnek](https://github.com/devsnek)** for his original Rich Presence example, which helped with much of the base code used for EasyRPC.
 Thanks to **Rung#9946** for the `Changing Images` documentation.
+Thanks to **Ardia#7038** for the initial FooBar2000 integration code.
