@@ -120,6 +120,7 @@ if (config.serviceConfig.whichService == 'spotify') {
         } else {
           activity.state = "No Artist"
         }
+        if (config.serviceConfig.useTimestamps == true) {
         if (res.playing_position) {
           activity.startTimestamp = moment(time).subtract(res.playing_position, 's').toDate()
           if (res.track.length) {
@@ -129,16 +130,17 @@ if (config.serviceConfig.whichService == 'spotify') {
           activity.startTimestamp = moment(time).subtract('0', 's').toDate()
           activity.endTimestamp = moment(time).add(res.track.length - 0, 's').toDate()
         }
+      }
         if (res.playing == true) {
           activity.smallImageKey = undefined
           activity.smallImageText = undefined
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          //activity.startTimestamp = undefined
-          //activity.endTimestamp = undefined
-          activity.endTimestamp = moment(time).add('0', 's').toDate();
-          activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
+          activity.startTimestamp = undefined
+          activity.endTimestamp = undefined
+          //activity.endTimestamp = moment(time).add('0', 's').toDate();
+          //activity.startTimestamp = moment(time).add('-' + res.playing_position, 's').toDate();
         }
         if (!oldID) {
           oldID = res.track.track_resource.uri

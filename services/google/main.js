@@ -109,6 +109,7 @@ if (config.serviceConfig.whichService == 'google') {
     //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
     //activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
     //activity.spectateSecret = "https://apple.com/music"
+    if (config.serviceConfig.useTimestamps == true) {
     if (musicContent.time.current) {
       activity.startTimestamp = moment(time).subtract(musicContent.time.current, 'ms').toDate()
       if (musicContent.time.total) {
@@ -118,6 +119,7 @@ if (config.serviceConfig.whichService == 'google') {
       activity.startTimestamp = moment(time).subtract('0', 's').toDate()
       activity.endTimestamp = moment(time).add(musicContent.time.total - 0, 'ms').toDate()
     }
+  }
     var tP = ''
     if (config.serviceConfig.titlePrefix) {
       tP = config.serviceConfig.titlePrefix + ' '//.charAt(0);
@@ -150,13 +152,13 @@ if (config.serviceConfig.whichService == 'google') {
   } else {
     activity.smallImageKey = 'icon-pause'
     activity.smallImageText = 'Paused'
-    if (musicContent.time.current && musicContent.time.total) {
-      activity.endTimestamp = moment(time).add('0', 'ms').toDate();
-      activity.startTimestamp = moment(time).add('-' + musicContent.time.current, 'ms').toDate();
-    } else {
+    //if (musicContent.time.current && musicContent.time.total) {
+      //activity.endTimestamp = moment(time).add('0', 'ms').toDate();
+      //activity.startTimestamp = moment(time).add('-' + musicContent.time.current, 'ms').toDate();
+    //} else {
       activity.startTimestamp = undefined
       activity.endTimestamp = undefined
-    }
+    //}
   }
 
 

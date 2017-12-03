@@ -131,17 +131,17 @@ end tell`)
         } else {
           activity.state = "No Artist"
         }
-        if (rtn.position) {
-          activity.startTimestamp = moment(time).subtract(rtn.position, 's').toDate()
-          if (rtn.duration) {
-            activity.endTimestamp = moment(time).add(rtn.duration - rtn.position, 's').toDate()
+        if (config.serviceConfig.useTimestamps == true) {
+          if (rtn.position) {
+            activity.startTimestamp = moment(time).subtract(rtn.position, 's').toDate()
+            if (rtn.duration) {
+              activity.endTimestamp = moment(time).add(rtn.duration - rtn.position, 's').toDate()
+            }
+          } else if ((oldID !== rtn.id || !oldID) && rtn.duration) {
+            activity.startTimestamp = moment(time).subtract('0', 's').toDate()
+            activity.endTimestamp = moment(time).add(rtn.duration - 0, 's').toDate()
           }
-        } else if ((oldID !== rtn.id || !oldID) && rtn.duration) {
-          activity.startTimestamp = moment(time).subtract('0', 's').toDate()
-          activity.endTimestamp = moment(time).add(rtn.duration - 0, 's').toDate()
         }
-
-
         if (rtn.state !== 'paused') {
           if (rtn.loved == false) {
             activity.smallImageKey = undefined
@@ -153,10 +153,10 @@ end tell`)
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          //activity.startTimestamp = undefined
-          //activity.endTimestamp = undefined
-          activity.endTimestamp = moment(time).add('0', 's').toDate();
-          activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+          activity.startTimestamp = undefined
+          activity.endTimestamp = undefined
+          //activity.endTimestamp = moment(time).add('0', 's').toDate();
+          //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
         }
 
         if (!oldID) {

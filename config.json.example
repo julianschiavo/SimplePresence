@@ -19,6 +19,7 @@
 "titlePrefix": "",
 "artistPrefix": "",
 "useUserInterface": true,
+"useTimestamps": true,
 "customClientID": "none",
 "imdbDefaultID": "tt3659388",
 "lastFM": {
