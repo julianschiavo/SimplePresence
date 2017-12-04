@@ -24,6 +24,9 @@
     "IMDB": {
       "defaultID": "tt3659388"
     },
+    "FooBar2000": {
+      "txtLocation": ""
+    },
     "YouTube": {
       "browser": "safari"
     },
