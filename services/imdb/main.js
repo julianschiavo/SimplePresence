@@ -17,7 +17,7 @@ if (config.serviceConfig.whichService == 'imdb') {
 
   var ClientId
   if (config.serviceConfig.customClientID == 'none') {
-    ClientId = "327592981580349440";
+    ClientId = "323687074894970880";
   } else {
     ClientId = config.serviceConfig.customClientID
   }
