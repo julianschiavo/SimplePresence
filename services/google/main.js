@@ -86,6 +86,7 @@ if (config.serviceConfig.whichService == 'google') {
   });
 
   var oldID
+  var oldTitle
   var oldTot
   var oldState = false
 
@@ -164,13 +165,15 @@ if (config.serviceConfig.whichService == 'google') {
 
   if (!oldID) {
     oldID = musicContent.song.albumArt
+    oldTitle = musicContent.song.title
     oldTot = musicContent.time.total
     oldState = musicContent.playing
     console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
     rpc.setActivity(activity);
   }
-  if (oldID !== musicContent.song.albumArt || oldTot !== musicContent.time.total || oldState !== musicContent.playing) {
+  if (oldID !== musicContent.song.albumArt || oldTitle !== musicContent.song.title || oldTot !== musicContent.time.total || oldState !== musicContent.playing) {
     oldID = musicContent.song.albumArt
+    oldTitle = musicContent.song.title
     oldTot = musicContent.time.total
     oldState = musicContent.playing
     console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, updating Rich Presence.`)
