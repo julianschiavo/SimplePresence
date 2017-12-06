@@ -1,4 +1,3 @@
-if (require('../config.json').serviceConfig.whichService == 'foobar') {
   var fileLocation
   const oss = require('os');
   const fs = require('fs');
@@ -27,46 +26,45 @@ if (require('../config.json').serviceConfig.whichService == 'foobar') {
   async function setFoobar() {
     //var content = fs.readFileSync(fileLocation);
     var musicContent = fs.readFileSync(fileLocation).toString().split('\n');
-	if (musicContent[0] == 'playing' || musicContent[0] == 'paused') {
-		if (typeof musicContent[5] == 'string') {
-		  document.getElementById('artwork').src = null
-		  if (document.getElementById('artwork').src) {
-			document.getElementById('hide').style.display = 'none'
-		  }
-		}
-		var tP = ''
-		if (require('../config.json').serviceConfig.titlePrefix) {
-		  tP = require('../config.json').serviceConfig.titlePrefix + ' '//.charAt(0);
-		}
-		var aP = ''
-		if (require('../config.json').serviceConfig.artistPrefix) {
-		   aP = require('../config.json').serviceConfig.artistPrefix + ' '//.charAt(0);
-		}
-			if (typeof musicContent[2] == 'string') {
-			  document.getElementById('name')[text] = tP + musicContent[1]
-			} else {
-			  document.getElementById('name')[text] = "No Song Found"
-			}
-			if (typeof musicContent[2] == 'string') {
-			  document.getElementById('artist')[text] = aP + musicContent[2]
-			} else {
-			  document.getElementById('artist')[text] = "No Artist Found"
-			}
-			if (!oldID) {
-			  oldID = musicContent[5]
-			  openTimestamp = new Date();
-			  document.getElementById('time')[text] = (Math.floor((parseInt(musicContent[3],10) / 1000) / 60) + 'm').toString()
-			}
-			if (oldID !== musicContent[5]) {
-			  oldID = musicContent[5]
-			  openTimestamp = new Date();
-			  document.getElementById('time')[text] = (Math.floor((parseInt(musicContent[3],10) / 1000) / 60) + 'm').toString()
-			}
-	}
+    if (musicContent[0] == 'playing' || musicContent[0] == 'paused') {
+      if (typeof musicContent[5] == 'string') {
+        document.getElementById('artwork').src = null
+        if (document.getElementById('artwork').src) {
+          document.getElementById('hide').style.display = 'none'
+        }
+      }
+      var tP = ''
+      if (require('../../config.json').serviceConfig.titlePrefix) {
+        tP = require('../config.json').serviceConfig.titlePrefix + ' ' //.charAt(0);
+      }
+      var aP = ''
+      if (require('../../config.json').serviceConfig.artistPrefix) {
+        aP = require('../../config.json').serviceConfig.artistPrefix + ' ' //.charAt(0);
+      }
+      if (typeof musicContent[2] == 'string') {
+        document.getElementById('name')[text] = tP + musicContent[1]
+      } else {
+        document.getElementById('name')[text] = "No Song Found"
+      }
+      if (typeof musicContent[2] == 'string') {
+        document.getElementById('artist')[text] = aP + musicContent[2]
+      } else {
+        document.getElementById('artist')[text] = "No Artist Found"
+      }
+      if (!oldID) {
+        oldID = musicContent[5]
+        openTimestamp = new Date();
+        document.getElementById('time')[text] = (Math.floor((parseInt(musicContent[3], 10) / 1000) / 60) + 'm').toString()
+      }
+      if (oldID !== musicContent[5]) {
+        oldID = musicContent[5]
+        openTimestamp = new Date();
+        document.getElementById('time')[text] = (Math.floor((parseInt(musicContent[3], 10) / 1000) / 60) + 'm').toString()
+      }
+    }
   }
 
   //document.getElementById('service')[text] = "Apple Music"
   setInterval(() => {
     setFoobar();
   }, 1000);
-}

@@ -27,9 +27,9 @@ if (config.imageConfig.showButton == false) {
   document.getElementById('button').style.display = 'none'
 }
 if (config.timeConfig.timeType !== 'none') {
-document.getElementById('time')[text] = config.timeConfig.whatTime
+  document.getElementById('time')[text] = config.timeConfig.whatTime
 } else {
-document.getElementById('divtime').style.display = 'none'
+  document.getElementById('divtime').style.display = 'none'
 }
 
 function upload() {

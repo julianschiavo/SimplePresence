@@ -117,7 +117,7 @@ async function setActivity() {
     activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
     activity.endTimestamp = moment(openTimestamp).add(parse(config.timeConfig.whatTime), 'ms').toDate();
   }
-    rpc.setActivity(activity);
+  rpc.setActivity(activity);
 }
 
 rpc.on('ready', () => {
