@@ -18,6 +18,7 @@ if (config.defaultText || config.imageKeys) {
 }
 
 const ClientId = config.clientID;
+var openTimestamp = false
 
 let mainWindow;
 
@@ -58,10 +59,6 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-}
-
-function getDuration() {
-
 }
 
 app.on('ready', createWindow);
@@ -106,9 +103,8 @@ async function setActivity() {
   }
 
   if (!openTimestamp) {
-    var openTimestamp = new Date();
+    openTimestamp = new Date();
   }
-
   if (config.timeConfig.timeType == 'start') {
     activity.startTimestamp = moment(openTimestamp).add(parse('-' + config.timeConfig.whatTime), 'ms').toDate();
   } else if (config.timeConfig.timeType == 'end') {
