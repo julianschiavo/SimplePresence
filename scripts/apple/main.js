@@ -131,6 +131,7 @@ end tell`)
       } else {
         activity.state = "No Artist"
       }
+      activity.name = 'hello'
       if (config.serviceConfig.useTimestamps == true) {
         if (rtn.position) {
           activity.startTimestamp = moment(time).subtract(rtn.position, 's').toDate()

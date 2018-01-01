@@ -15,7 +15,6 @@
     "whatTime": "0s"
   },
   "serviceConfig": {
-    "whichService": "none",
     "titlePrefix": "",
     "artistPrefix": "",
     "useUserInterface": true,
