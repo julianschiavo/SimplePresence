@@ -7,7 +7,7 @@ const {
 const path = require('path');
 const url = require('url');
 const DiscordRPC = require('discord-rpc');
-const config = require('../config.json');
+const config = require('../../config.json');
 const fs = require('fs');
 const parse = require('parse-duration')
 const moment = require('moment')
