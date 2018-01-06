@@ -18,7 +18,7 @@ if (config.defaultText || config.imageKeys) {
 }
 
 const ClientId = config.clientID;
-
+var openTimestamp
 let mainWindow;
 
 function createWindow() {
@@ -106,7 +106,7 @@ async function setActivity() {
   }
 
   if (!openTimestamp) {
-    var openTimestamp = new Date();
+    openTimestamp = new Date();
   }
 
   if (config.timeConfig.timeType == 'start') {

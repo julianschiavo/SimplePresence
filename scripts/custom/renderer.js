@@ -12,7 +12,7 @@ if (os.type() !== 'Darwin') {
 
 webFrame.setZoomLevelLimits(1, 1);
 
-const config = require('../config.json')
+const config = require('../../config.json')
 console.log(config.textConfig.details)
 console.log(config.textConfig.state)
 console.log(config.imageConfig.smallText)
