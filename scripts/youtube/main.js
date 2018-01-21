@@ -100,19 +100,14 @@ async function setActivity() {
   //activity.startTimestamp = moment(openTimestamp).add(parse('0s'), 'ms').toDate();
   if (config.serviceConfig.YouTube.browser == 'safari') {
     applescript(`set ok to "hi"
-  tell application "Safari"
+    tell application "Safari"
   	repeat with t in tabs of windows
   		tell t
   			if URL starts with "http://www.youtube.com/watch" or URL starts with "https://www.youtube.com/watch" then
-  				set ok to do JavaScript "
-          var text = 'textContent' in document.body ? 'textContent' : 'innerText';
+  				set ok to do JavaScript "var text = 'textContent' in document.body ? 'textContent' : 'innerText';
   var ytname = document.querySelector('#container > h1')[text]
   var ytowner = document.querySelector('#owner-name > a')[text]
-  -- var ytpos = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-current')[text]
-  -- var ytlength = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-duration')[text]
-  -- ,'position':ytpos,'duration':ytlength,'state':state
-  ok = { 'tname':ytname,'artist':ytowner }
-          "
+  ok = { 'tname':ytname,'artist':ytowner,'state':'playing' }"
   				exit repeat
   			end if
   		end tell
@@ -141,31 +136,32 @@ async function setActivity() {
         } else {
           activity.state = "No Uploader"
         }
-        if (config.serviceConfig.useTimestamps == true) {
-          var a = rtn.position.split(':');
-          var b = rtn.duration.split(':');
-          var msp = (+a[0]) * 60 + (+a[1]);
-          var msd = (+b[0]) * 60 + (+b[1]);
-          if (msp) {
-            //activity.startTimestamp = moment(time).subtract(msp, 's').toDate()
-            if (msd) {
-              //activity.endTimestamp = moment(time).add(msd - msp, 's').toDate()
-            }
-          } else if ((oldID !== rtn.tname || !oldID) && msd) {
-            //activity.startTimestamp = moment(time).subtract('0', 's').toDate()
-            //activity.endTimestamp = moment(time).add(msd - 0, 's').toDate()
-          }
-        }
+        /*
+                if (config.serviceConfig.useTimestamps == true) {
+                  var a = rtn.position.split(':');
+                  var b = rtn.duration.split(':');
+                  var msp = (+a[0]) * 60 + (+a[1]);
+                  var msd = (+b[0]) * 60 + (+b[1]);
+                  if (msp) {
+                    //activity.startTimestamp = moment(time).subtract(msp, 's').toDate()
+                    if (msd) {
+                      //activity.endTimestamp = moment(time).add(msd - msp, 's').toDate()
+                    }
+                  } else if ((oldID !== rtn.tname || !oldID) && msd) {
+                    //activity.startTimestamp = moment(time).subtract('0', 's').toDate()
+                    //activity.endTimestamp = moment(time).add(msd - 0, 's').toDate()
+                  }
+                }*/
         if (rtn.state == 'playing') {
           activity.smallImageKey = undefined
           activity.smallImageText = undefined
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          //activity.startTimestamp = undefined
-          //activity.endTimestamp = undefined
-          //activity.endTimestamp = moment(time).add('0', 's').toDate();
-          //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+          /*activity.startTimestamp = undefined
+          activity.endTimestamp = undefined
+          activity.endTimestamp = moment(time).add('0', 's').toDate();
+          activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();*/
         }
 
         if (!oldID) {
@@ -186,7 +182,7 @@ async function setActivity() {
       });
   } else {
     applescript(`set ok to "hi"
-tell application "Google Chrome"
+    tell application "Google Chrome"
 	repeat with t in tabs of windows
 		tell t
 			if URL starts with "http://www.youtube.com/watch" or URL starts with "https://www.youtube.com/watch" then
@@ -194,11 +190,7 @@ tell application "Google Chrome"
         var text = 'textContent' in document.body ? 'textContent' : 'innerText';
 var ytname = document.querySelector('#container > h1')[text]
 var ytowner = document.querySelector('#owner-name > a')[text]
--- var ytpos = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-current')[text]
--- var ytlength = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-duration')[text]
--- ,'position':ytpos,'duration':ytlength
-ok = { 'tname':ytname,'artist':ytowner }
-        "
+ok = { 'tname':ytname,'artist':ytowner,'state':'playing' }"
 				exit repeat
 			end if
 		end tell
@@ -206,9 +198,9 @@ ok = { 'tname':ytname,'artist':ytowner }
 end tell
 return ok`)
       .then((rtn) => {
-        //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
-        //activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
-        //activity.spectateSecret = "https://apple.com/music"
+        /*activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+        activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
+        activity.spectateSecret = "https://apple.com/music"*/
         var tP = ''
         if (config.serviceConfig.titlePrefix) {
           tP = config.serviceConfig.titlePrefix + ' ' //.charAt(0);
@@ -227,7 +219,7 @@ return ok`)
         } else {
           activity.state = "No Uploader"
         }
-        if (config.serviceConfig.useTimestamps == true) {
+        /*if (config.serviceConfig.useTimestamps == true) {
           var a = rtn.position.split(':');
           var b = rtn.duration.split(':');
           var msp = (+a[0]) * 60 + (+a[1]);
@@ -241,17 +233,17 @@ return ok`)
             //activity.startTimestamp = moment(time).subtract('0', 's').toDate()
             //activity.endTimestamp = moment(time).add(msd - 0, 's').toDate()
           }
-        }
+        }*/
         if (rtn.state == 'playing') {
           activity.smallImageKey = undefined
           activity.smallImageText = undefined
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          //activity.startTimestamp = undefined
-          //activity.endTimestamp = undefined
-          //activity.endTimestamp = moment(time).add('0', 's').toDate();
-          //activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
+          /*activity.startTimestamp = undefined
+          activity.endTimestamp = undefined
+          activity.endTimestamp = moment(time).add('0', 's').toDate();
+          activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();*/
         }
 
         if (!oldID) {
