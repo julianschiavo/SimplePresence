@@ -81,7 +81,7 @@ const rpc = new DiscordRPC.Client({
 });
 
 var oldID
-var oldState
+var coldID
 
 async function setActivity() {
   if (!rpc || (config.serviceConfig.useUserInterface == true && !mainWindow))
@@ -126,15 +126,20 @@ async function setActivity() {
         if (config.serviceConfig.artistPrefix) {
           aP = config.serviceConfig.artistPrefix + ' ' //.charAt(0);
         }
-        if (rtn.tname) {
-          activity.details = tP + rtn.tname
+        if (rtn.tname.indexOf(' - ') > -1 || rtn.tname.indexOf('Official Video') > -1 || rtn.tname.indexOf('[Official]') > -1) {
+          activity.details = tP + rtn.tname.split(' - ')[1].split(' (Official')[0].split(' ft. ')[0].split(' (from')[0].split(' (Lyrics')[0].split(' (Audio')[0].split(' [Official')[0].split(' (feat.')[0].split(' (OFFICIAL')[0].split(' [OFFICIAL')[0].split(' (ft.')[0]
+          activity.state = tP + rtn.tname.split(' - ')[0]
         } else {
-          activity.details = "No Video Name"
-        }
-        if (rtn.artist) {
-          activity.state = aP + rtn.artist
-        } else {
-          activity.state = "No Uploader"
+          if (rtn.tname) {
+            activity.details = tP + rtn.tname
+          } else {
+            activity.details = "No Title"
+          }
+          if (rtn.artist) {
+            activity.state = aP + rtn.artist
+          } else {
+            activity.state = "No Uploader"
+          }
         }
         /*
                 if (config.serviceConfig.useTimestamps == true) {
@@ -180,24 +185,22 @@ async function setActivity() {
       .catch((error) => {
         console.log(error);
       });
-  } else {
-    applescript(`set ok to "hi"
+  } else if (config.serviceConfig.YouTube.browser == 'chrome') {
+    applescript(`set rtnn to "ok"
     tell application "Google Chrome"
 	repeat with t in tabs of windows
 		tell t
-			if URL starts with "http://www.youtube.com/watch" or URL starts with "https://www.youtube.com/watch" then
-				set ok to execute JavaScript "
-        var text = 'textContent' in document.body ? 'textContent' : 'innerText';
+			if URL starts with "http://www.youtube.com/watch?v=" or URL starts with "https://www.youtube.com/watch?v=" then
+				set rtnn to execute JavaScript "var text = 'textContent' in document.body ? 'textContent' : 'innerText';
 var ytname = document.querySelector('#container > h1')[text]
 var ytowner = document.querySelector('#owner-name > a')[text]
-ok = { 'tname':ytname,'artist':ytowner,'state':'playing' }"
+ok = { 'yttitle':ytname,'artist':ytowner,'state':'playing' }"
 				exit repeat
 			end if
 		end tell
 	end repeat
 end tell
-return ok`)
-      .then((rtn) => {
+return rtnn`).then((rtn) => {
         /*activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();
         activity.endTimestamp = moment(time).add(rtn.duration, 's').toDate();
         activity.spectateSecret = "https://apple.com/music"*/
@@ -209,15 +212,21 @@ return ok`)
         if (config.serviceConfig.artistPrefix) {
           aP = config.serviceConfig.artistPrefix + ' ' //.charAt(0);
         }
-        if (rtn.tname) {
-          activity.details = tP + rtn.tname
+
+        if (rtn.yttitle.indexOf(' - ') > -1 || rtn.yttitle.indexOf('Official Video') > -1 || rtn.yttitle.indexOf('[Official]') > -1) {
+          activity.details = tP + rtn.yttitle.split(' - ')[1].split(' (Official')[0].split(' ft. ')[0].split(' (from')[0].split(' (Lyrics')[0].split(' (Audio')[0].split(' [Official')[0].split(' (feat.')[0].split(' (OFFICIAL')[0].split(' [OFFICIAL')[0].split(' (ft.')[0]
+          activity.state = tP + rtn.yttitle.split(' - ')[0]
         } else {
-          activity.details = "No Video Name"
-        }
-        if (rtn.artist) {
-          activity.state = aP + rtn.artist
-        } else {
-          activity.state = "No Uploader"
+          if (rtn.yttitle) {
+            activity.details = tP + rtn.yttitle
+          } else {
+            activity.details = "No Title"
+          }
+          if (rtn.artist) {
+            activity.state = aP + rtn.artist
+          } else {
+            activity.state = "No Uploader"
+          }
         }
         /*if (config.serviceConfig.useTimestamps == true) {
           var a = rtn.position.split(':');
@@ -247,13 +256,13 @@ return ok`)
         }
 
         if (!oldID) {
-          oldID = rtn.tname
+          oldID = rtn.yttitle
           //oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
         } // || oldState !== rtn.state
-        if (oldID !== rtn.tname) {
-          oldID = rtn.tname
+        if (oldID !== rtn.yttitle) {
+          oldID = rtn.yttitle
           //oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, updating Rich Presence.`)
           rpc.setActivity(activity);
