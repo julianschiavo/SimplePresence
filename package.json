@@ -1,8 +1,8 @@
 {
   "name": "SimplePresence",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "An easy and simple way to set your Discord Rich Presence Status through RPC!",
-  "main": "main/main.js",
+  "main": "scripts/custom/main.js",
   "author": "dotJS",
   "license": "MIT",
   "homepage": "https://github.com/justdotJS/SimplePresence#readme",

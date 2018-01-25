@@ -1,0 +1,46 @@
+{
+  "name": "SimplePresence",
+  "version": "2.5.1",
+  "description": "An easy and simple way to set your Discord Rich Presence Status through RPC!",
+  "main": "scripts/custom/main.js",
+  "author": "dotJS",
+  "license": "MIT",
+  "homepage": "https://github.com/justdotJS/SimplePresence#readme",
+  "bugs": {
+    "url": "https://github.com/justdotJS/SimplePresence/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justdotJS/SimplePresence.git"
+  },
+  "scripts": {
+    "custom": "electron scripts/custom/main.js",
+    "apple": "electron scripts/apple/main.js",
+    "spotify": "electron scripts/spotify/main.js",
+    "google": "electron scripts/google/main.js",
+    "lastfm": "electron scripts/lastfm/main.js",
+    "imdb": "electron scripts/imdb/main.js",
+    "youtube": "electron scripts/youtube/main.js",
+    "foobar": "electron scripts/foobar/main.js"
+  },
+  "dependencies": {
+    "@dnode/parse-duration": "^1.4.2",
+    "discord-rpc": "github:devsnek/discord-rpc",
+    "electron": "^1.7.9",
+    "imdb": "^1.1.0",
+    "lastfm": "^0.9.2",
+    "moment": "^2.19.2",
+    "node-spotify-webhelper": "github:justdotJS/node-spotify-webhelper",
+    "open": "0.0.5",
+    "osascript-promise": "^1.0.0",
+    "parse-duration": "^0.1.1",
+    "snekfetch": "^3.5.8"
+  },
+  "browser": {
+    "net": false,
+    "ws": false,
+    "uws": false,
+    "erlpack": false,
+    "src/transports/IPC.js": false
+  }
+}
