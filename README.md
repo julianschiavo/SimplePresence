@@ -1,13 +1,16 @@
+---
+
+## Due to Discord selling out to Spotify, we are unable to use the cool shit they have on their integration. 
+### I doubt I'll be updating this further except for big bugs or issues found in the future. Thanks for hanging with me, the original README is below.
+
+---
+
 [![Discord](https://img.shields.io/discord/268970339948691456.svg?style=flat-square&colorB=7289DA)](https://discord.gg/MpnbrX7)
 [![Dependencies](https://img.shields.io/david/justdotJS/EasyRPC.svg?style=flat-square)]()
 [![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)](https://dotjs.party/donate)
 [![Website](https://img.shields.io/badge/go_to-site-000000.svg?style=flat-square)](https://dotjs.party)
 
 # SimplePresence
-### Due to Discord selling out to Spotify, we are unable to use the cool shit they have on their integration. I doubt I'll be updating this further except for big bugs or issues found in the future. Thanks for hanging with me, the original README is below.
-
----
-
 SimplePresence is an Electron app for macOS, Windows, and Linux that allows users to easily set their Discord Rich Presence Status.
 It has a config for default strings, which can then be changed through the app at any time.
 
