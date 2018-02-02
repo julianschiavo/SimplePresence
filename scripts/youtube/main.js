@@ -107,7 +107,13 @@ async function setActivity() {
   				set ok to do JavaScript "var text = 'textContent' in document.body ? 'textContent' : 'innerText';
   var ytname = document.querySelector('#container > h1')[text]
   var ytowner = document.querySelector('#owner-name > a')[text]
-  ok = { 'tname':ytname,'artist':ytowner,'state':'playing' }"
+  var currentTime = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-current')[text]
+  var totalTime = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-duration')[text]
+  var playy = 'playing'
+  if (document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button').getAttribute('aria-label') == 'Play') {
+    playy = 'paused'
+  }
+  ok = { 'tname':ytname,'artist':ytowner,'state':playy,'nowT':currentTime,'fullT':totalTime }"
   				exit repeat
   			end if
   		end tell
@@ -141,43 +147,39 @@ async function setActivity() {
             activity.state = "No Uploader"
           }
         }
-        /*
-                if (config.serviceConfig.useTimestamps == true) {
-                  var a = rtn.position.split(':');
-                  var b = rtn.duration.split(':');
-                  var msp = (+a[0]) * 60 + (+a[1]);
-                  var msd = (+b[0]) * 60 + (+b[1]);
-                  if (msp) {
-                    //activity.startTimestamp = moment(time).subtract(msp, 's').toDate()
-                    if (msd) {
-                      //activity.endTimestamp = moment(time).add(msd - msp, 's').toDate()
-                    }
-                  } else if ((oldID !== rtn.tname || !oldID) && msd) {
-                    //activity.startTimestamp = moment(time).subtract('0', 's').toDate()
-                    //activity.endTimestamp = moment(time).add(msd - 0, 's').toDate()
-                  }
-                }*/
+        if (config.serviceConfig.useTimestamps == true) {
+          var currentTime = rtn.nowT.split(':');
+          var totalTime = rtn.fullT.split(':');
+          var currentTimeS = (+currentTime[0]) * 60 + (+currentTime[1]);
+          var totalTimeS = (+totalTime[0]) * 60 + (+totalTime[1]);
+          if (currentTimeS) {
+            activity.startTimestamp = moment(time).subtract(currentTimeS, 's').toDate()
+            if (totalTimeS) {
+              activity.endTimestamp = moment(time).add(totalTimeS - currentTimeS, 's').toDate()
+            }
+          }
+        }
         if (rtn.state == 'playing') {
           activity.smallImageKey = undefined
           activity.smallImageText = undefined
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          /*activity.startTimestamp = undefined
+          activity.startTimestamp = undefined
           activity.endTimestamp = undefined
-          activity.endTimestamp = moment(time).add('0', 's').toDate();
+          /*activity.endTimestamp = moment(time).add('0', 's').toDate();
           activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();*/
         }
 
         if (!oldID) {
           oldID = rtn.tname
-          //oldState = rtn.state
+          oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
-        } // || oldState !== rtn.state
-        if (oldID !== rtn.tname) {
+        }
+        if (oldID !== rtn.tname || oldState !== rtn.state) {
           oldID = rtn.tname
-          //oldState = rtn.state
+          oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, updating Rich Presence.`)
           rpc.setActivity(activity);
         }
@@ -194,7 +196,13 @@ async function setActivity() {
 				set rtnn to execute JavaScript "var text = 'textContent' in document.body ? 'textContent' : 'innerText';
 var ytname = document.querySelector('#container > h1')[text]
 var ytowner = document.querySelector('#owner-name > a')[text]
-ok = { 'yttitle':ytname,'artist':ytowner,'state':'playing' }"
+var currentTime = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-current')[text]
+var totalTime = document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > div > span.ytp-time-duration')[text]
+var playy = 'playing'
+if (document.querySelector('#movie_player > div.ytp-chrome-bottom > div.ytp-chrome-controls > div.ytp-left-controls > button').getAttribute('aria-label') == 'Play') {
+  playy = 'paused'
+}
+ok = { 'yttitle':ytname,'artist':ytowner,'state':playy,'nowT':currentTime,'fullT':totalTime }"
 				exit repeat
 			end if
 		end tell
@@ -228,42 +236,39 @@ return rtnn`).then((rtn) => {
             activity.state = "No Uploader"
           }
         }
-        /*if (config.serviceConfig.useTimestamps == true) {
-          var a = rtn.position.split(':');
-          var b = rtn.duration.split(':');
-          var msp = (+a[0]) * 60 + (+a[1]);
-          var msd = (+b[0]) * 60 + (+b[1]);
-          if (msp) {
-            //activity.startTimestamp = moment(time).subtract(msp, 's').toDate()
-            if (msd) {
-              //activity.endTimestamp = moment(time).add(msd - msp, 's').toDate()
+        if (config.serviceConfig.useTimestamps == true) {
+          var currentTime = rtn.nowT.split(':');
+          var totalTime = rtn.fullT.split(':');
+          var currentTimeS = (+currentTime[0]) * 60 + (+currentTime[1]);
+          var totalTimeS = (+totalTime[0]) * 60 + (+totalTime[1]);
+          if (currentTimeS) {
+            activity.startTimestamp = moment(time).subtract(currentTimeS, 's').toDate()
+            if (totalTimeS) {
+              activity.endTimestamp = moment(time).add(totalTimeS - currentTimeS, 's').toDate()
             }
-          } else if ((oldID !== rtn.tname || !oldID) && msd) {
-            //activity.startTimestamp = moment(time).subtract('0', 's').toDate()
-            //activity.endTimestamp = moment(time).add(msd - 0, 's').toDate()
           }
-        }*/
+        }
         if (rtn.state == 'playing') {
           activity.smallImageKey = undefined
           activity.smallImageText = undefined
         } else {
           activity.smallImageKey = 'icon-pause'
           activity.smallImageText = 'Paused'
-          /*activity.startTimestamp = undefined
+          activity.startTimestamp = undefined
           activity.endTimestamp = undefined
-          activity.endTimestamp = moment(time).add('0', 's').toDate();
+          /*activity.endTimestamp = moment(time).add('0', 's').toDate();
           activity.startTimestamp = moment(time).add('-' + rtn.position, 's').toDate();*/
         }
 
         if (!oldID) {
           oldID = rtn.yttitle
-          //oldState = rtn.state
+          oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Initialised Successfully.`);
           rpc.setActivity(activity);
-        } // || oldState !== rtn.state
-        if (oldID !== rtn.yttitle) {
+        }
+        if (oldID !== rtn.yttitle || oldState !== rtn.state) {
           oldID = rtn.yttitle
-          //oldState = rtn.state
+          oldState = rtn.state
           console.log(`[${new Date().toLocaleTimeString()}]: Status Change Detected, updating Rich Presence.`)
           rpc.setActivity(activity);
         }
