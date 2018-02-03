@@ -1,7 +1,7 @@
 ---
 
-## Due to Discord selling out to Spotify, we are unable to use the cool shit they have on their integration. 
-### I doubt I'll be updating this further except for big bugs or issues found in the future. Thanks for hanging with me, the original README is below.
+### Due to Discord selling out to Spotify, we are unable to use the cool shit they have on their integration. 
+#### Make sure to tell your friends about what Discord is doing to help our movement that Discord should let third party developers use the same cool features.
 
 ---
 
