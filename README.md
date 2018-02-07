@@ -1,10 +1,5 @@
 ---
 
-### Due to Discord selling out to Spotify, we are unable to use the cool shit they have on their integration. 
-#### Make sure to tell your friends about what Discord is doing to help our movement that Discord should let third party developers use the same cool features.
-
----
-
 [![Discord](https://img.shields.io/discord/268970339948691456.svg?style=flat-square&colorB=7289DA)](https://discord.gg/MpnbrX7)
 [![Dependencies](https://img.shields.io/david/justdotJS/EasyRPC.svg?style=flat-square)]()
 [![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)](https://dotjs.party/donate)
