@@ -21,7 +21,8 @@
     "lastfm": "electron scripts/lastfm/main.js",
     "imdb": "electron scripts/imdb/main.js",
     "youtube": "electron scripts/youtube/main.js",
-    "foobar": "electron scripts/foobar/main.js"
+    "foobar": "electron scripts/foobar/main.js",
+    "postinstall": "opencollective postinstall"
   },
   "dependencies": {
     "@dnode/parse-duration": "^1.4.2",
@@ -32,6 +33,7 @@
     "moment": "^2.19.2",
     "node-spotify-webhelper": "github:justdotJS/node-spotify-webhelper",
     "open": "0.0.5",
+    "opencollective": "^1.0.3",
     "osascript-promise": "^1.0.0",
     "parse-duration": "^0.1.1",
     "snekfetch": "^3.5.8"
@@ -42,5 +44,9 @@
     "uws": false,
     "erlpack": false,
     "src/transports/IPC.js": false
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/dot"
   }
 }
