@@ -125,7 +125,7 @@ rpc.on('ready', () => {
 
   setInterval(() => {
     setActivity();
-  }, 15e3);
+  }, 1000);
 });
 
 rpc.login(ClientId).catch(console.error);
