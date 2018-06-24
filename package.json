@@ -30,11 +30,12 @@
     "imdb": "^1.1.0",
     "lastfm": "^0.9.2",
     "moment": "^2.19.2",
-    "node-spotify-webhelper": "github:justdotJS/node-spotify-webhelper",
+    "node-spotify-webhelper": "github:justJS/node-spotify-webhelper",
     "open": "0.0.5",
     "osascript-promise": "^1.0.0",
     "parse-duration": "^0.1.1",
-    "snekfetch": "^3.5.8"
+    "snekfetch": "^3.5.8",
+    "prism-media": "github:justJS/prism-media#patch-1"
   },
   "browser": {
     "net": false,
