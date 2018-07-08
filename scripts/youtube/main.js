@@ -17,10 +17,10 @@ const parse = require('parse-duration')
 const moment = require('moment')
 
 var clientId
-if (config.serviceConfig.customclientID == 'none') {
+if (config.serviceConfig.customClientID == 'none') {
   clientId = "325545800400764938";
 } else {
-  clientId = config.serviceConfig.customclientID
+  clientId = config.serviceConfig.customClientID
 }
 
 let mainWindow;
