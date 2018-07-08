@@ -128,4 +128,4 @@ rpc.on('ready', () => {
   }, 15e3);
 });
 
-rpc.login(ClientId).catch(console.error);
+rpc.login({ClientId}).catch(console.error);
