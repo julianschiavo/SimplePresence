@@ -17,7 +17,7 @@ if (config.defaultText || config.imageKeys) {
   return app.quit();
 }
 
-const ClientId = config.clientID;
+const clientId = config.clientID;
 var openTimestamp
 let mainWindow;
 
@@ -75,7 +75,7 @@ app.on('activate', () => {
     createWindow();
 });
 
-DiscordRPC.register(ClientId);
+DiscordRPC.register(clientId);
 
 const rpc = new DiscordRPC.Client({
   transport: 'ipc'
@@ -128,4 +128,4 @@ rpc.on('ready', () => {
   }, 15e3);
 });
 
-rpc.login(ClientId).catch(console.error);
+rpc.login( {clientId} ).catch(console.error);

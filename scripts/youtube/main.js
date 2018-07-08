@@ -16,11 +16,11 @@ const fs = require('fs');
 const parse = require('parse-duration')
 const moment = require('moment')
 
-var ClientId
+var clientId
 if (config.serviceConfig.customClientID == 'none') {
-  ClientId = "325545800400764938";
+  clientId = "325545800400764938";
 } else {
-  ClientId = config.serviceConfig.customClientID
+  clientId = config.serviceConfig.customClientID
 }
 
 let mainWindow;
@@ -74,7 +74,7 @@ if (config.serviceConfig.useUserInterface == true) {
   });
 }
 
-DiscordRPC.register(ClientId);
+DiscordRPC.register(clientId);
 
 const rpc = new DiscordRPC.Client({
   transport: 'ipc'
@@ -296,4 +296,4 @@ setActivity();
 setInterval(() => {
   setActivity();
 }, 1000);
-rpc.login(ClientId).catch(console.error);
+rpc.login( {clientId} ).catch(console.error);
