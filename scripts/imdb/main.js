@@ -19,7 +19,7 @@ var clientId
 if (config.serviceConfig.customclientID == 'none') {
   clientId = "323687074894970880";
 } else {
-  clientId = config.serviceConfig.customclientID
+  clientId = config.serviceConfig.customClientID
 }
 
 let mainWindow;
