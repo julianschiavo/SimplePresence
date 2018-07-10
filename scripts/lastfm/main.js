@@ -116,4 +116,4 @@ rpc.on('ready', () => {
   trackStream.start();
 });
 
-rpc.login({ClientId}).catch(console.error);
+rpc.login({clientId: ClientId}).catch(console.error);

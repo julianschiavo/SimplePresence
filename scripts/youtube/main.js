@@ -296,4 +296,4 @@ setActivity();
 setInterval(() => {
   setActivity();
 }, 1000);
-rpc.login({ClientId}).catch(console.error);
+rpc.login({clientId: ClientId}).catch(console.error);
