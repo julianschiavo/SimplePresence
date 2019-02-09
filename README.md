@@ -1,7 +1,7 @@
 ---
 
 [![Discord](https://img.shields.io/discord/268970339948691456.svg?style=flat-square&colorB=7289DA)](https://discord.gg/js)
-[![Twitter](https://twitter.com/justjs_dev)
+[![Twitter](https://img.shields.io/badge/twitter-003087.svg?style=flat-square)](https://twitter.com/justjs_dev)
 
 # Note
 **Support for the latest Discord versions may not be perfect and is still being worked on!**
