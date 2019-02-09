@@ -1,8 +1,10 @@
 ---
 
-[![Discord](https://img.shields.io/discord/268970339948691456.svg?style=flat-square&colorB=7289DA)](https://discord.gg/MpnbrX7)
-[![PayPal](https://img.shields.io/badge/donate-paypal-003087.svg?style=flat-square)](https://dotjs.party/donate)
-[![dis.gg](https://img.shields.io/badge/go_to-site-ff8800.svg?style=flat-square)](https://about.dis.gg)
+[![Discord](https://img.shields.io/discord/268970339948691456.svg?style=flat-square&colorB=7289DA)](https://discord.gg/js)
+[![Twitter](https://twitter.com/justjs_dev)
+
+# Note
+**Support for the latest Discord versions may not be perfect and is still being worked on!**
 
 # SimplePresence
 SimplePresence is an Electron app for macOS, Windows, and Linux that allows users to easily set their Discord Rich Presence Status.
