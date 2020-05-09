@@ -10,7 +10,7 @@ if (os.type() !== 'Darwin') {
   document.body.style.backgroundColor = '#4C4C4C'
 }
 
-webFrame.setZoomLevelLimits(1, 1);
+webFrame.setVisualZoomLevelLimits(1, 1);
 
 const config = require('../../config.json')
 console.log(config.textConfig.details)

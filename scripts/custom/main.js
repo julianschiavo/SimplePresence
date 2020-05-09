@@ -32,7 +32,10 @@ function createWindow() {
     vibrancy: 'dark',
     hasShadow: false,
     frame: false,
-    show: false
+    show: false,
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
   if (config.imageConfig.showButton == true) {
