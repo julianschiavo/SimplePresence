@@ -51,7 +51,10 @@ if (config.serviceConfig.useUserInterface == true) {
       hasShadow: false,
       show: false,
       frame: false,
-      fullscreen: false
+      fullscreen: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
     });
 
     mainWindow.on('ready-to-show', () => {

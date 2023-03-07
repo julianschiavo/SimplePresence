@@ -50,7 +50,10 @@ if (config.serviceConfig.useUserInterface == true) {
       radii: [5, 5, 5, 5],
       show: false,
       frame: false,
-      fullscreen: false
+      fullscreen: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
     });
 
     mainWindow.on('ready-to-show', () => {
